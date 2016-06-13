@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>MySQL的命令总结(一) | Bitamin Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="数据库的命令行操作语句总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL的命令总结(一)">
+<meta property="og:url" content="http://bitaminkim.github.io/2016/05/25/MySQL的命令总结-一/index.html">
+<meta property="og:site_name" content="Bitamin Blog">
+<meta property="og:description" content="数据库的命令行操作语句总结">
+<meta property="og:updated_time" content="2016-05-26T10:33:04.031Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL的命令总结(一)">
+<meta name="twitter:description" content="数据库的命令行操作语句总结">
+  
+    <link rel="alternative" href="/rss.xml" title="Bitamin Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">Bitamin Kim</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">黄东鹏</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">首页</a></li>
+                        
+                            <li><a href="/Works">作品</a></li>
+                        
+                            <li><a href="/About">简历</a></li>
+                        
+                            <li><a href="/Life">生活</a></li>
+                        
+                            <li><a href="/Like">兴趣</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=w-X3_vvw_vb08oOysu2grK4" title="mail">mail</a>
+                            
+                                <a class="fl coding" target="_blank" href="https://coding.net/u/BitaminKim" title="coding">coding</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/BitaminKim" title="github">github</a>
+                            
+                                <a class="fl stackoverflow" target="_blank" href="http://stackoverflow.com/users/6459971/%E9%BB%84%E4%B8%9C%E9%B9%8F" title="stackoverflow">stackoverflow</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="https://www.zhihu.com/people/huangdongpeng" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="http://weibo.com/lookhackerss" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="https://plus.google.com/u/0/101979608232235486497" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="https://twitter.com/huangdongpeng" title="twitter">twitter</a>
+                            
+                                <a class="fl facebook" target="_blank" href="https://www.facebook.com/huangdongpeng" title="facebook">facebook</a>
+                            
+                                <a class="fl Instagram" target="_blank" href="https://www.instagram.com/bitamin.kim" title="Instagram">Instagram</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="https://www.linkedin.com/in/%e4%b8%9c%e9%b9%8f-%e9%bb%84-a46482109" title="linkedin">linkedin</a>
+                            
+                                <a class="fl soundcloud" target="_blank" href="https://soundcloud.com/dp-kim" title="soundcloud">soundcloud</a>
+                            
+                                <a class="fl QQ" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=649839571&site=qq&menu=yes" title="QQ">QQ</a>
+                            
+                                <a class="fl wechat" target="_blank" href="/img/Wechatjpg.jpg" title="wechat">wechat</a>
+                            
+                                <a class="fl rss" target="_blank" href="/rss.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/开始/" style="font-size: 10px;">开始</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="/archives">所有文章</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://MOxFIVE.github.io/">MOxFIVE</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.vsay.cn/">DoubleV</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.ccwebsite.com/">兮兮</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.dandyweng.com/">翁天信</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.plqblog.com/views/index.php">潘利强</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.hankin.cn/">hankin</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.waydrow.com/">waydrow</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">动漫宅、技术宅、眼镜男、喜欢风景、喜欢游戏、喜欢音乐(Electronic Music)、喜欢旅游、向往外国极限运动。</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Bitamin Kim</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Bitamin Kim</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">黄东鹏</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">首页</a></li>
+                
+                    <li><a href="/Works">作品</a></li>
+                
+                    <li><a href="/About">简历</a></li>
+                
+                    <li><a href="/Life">生活</a></li>
+                
+                    <li><a href="/Like">兴趣</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=w-X3_vvw_vb08oOysu2grK4" title="mail">mail</a>
+                    
+                        <a class="coding" target="_blank" href="https://coding.net/u/BitaminKim" title="coding">coding</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/BitaminKim" title="github">github</a>
+                    
+                        <a class="stackoverflow" target="_blank" href="http://stackoverflow.com/users/6459971/%E9%BB%84%E4%B8%9C%E9%B9%8F" title="stackoverflow">stackoverflow</a>
+                    
+                        <a class="zhihu" target="_blank" href="https://www.zhihu.com/people/huangdongpeng" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="http://weibo.com/lookhackerss" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="https://plus.google.com/u/0/101979608232235486497" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="https://twitter.com/huangdongpeng" title="twitter">twitter</a>
+                    
+                        <a class="facebook" target="_blank" href="https://www.facebook.com/huangdongpeng" title="facebook">facebook</a>
+                    
+                        <a class="Instagram" target="_blank" href="https://www.instagram.com/bitamin.kim" title="Instagram">Instagram</a>
+                    
+                        <a class="linkedin" target="_blank" href="https://www.linkedin.com/in/%e4%b8%9c%e9%b9%8f-%e9%bb%84-a46482109" title="linkedin">linkedin</a>
+                    
+                        <a class="soundcloud" target="_blank" href="https://soundcloud.com/dp-kim" title="soundcloud">soundcloud</a>
+                    
+                        <a class="QQ" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=649839571&site=qq&menu=yes" title="QQ">QQ</a>
+                    
+                        <a class="wechat" target="_blank" href="/img/Wechatjpg.jpg" title="wechat">wechat</a>
+                    
+                        <a class="rss" target="_blank" href="/rss.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-MySQL的命令总结-一" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/25/MySQL的命令总结-一/" class="article-date">
+      <time datetime="2016-05-25T08:55:42.000Z" itemprop="datePublished">2016-05-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MySQL的命令总结(一)
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/开发/">开发</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>数据库的命令行操作语句总结<br><a id="more"></a></p>
+<h2 id="数据库登入"><a href="#数据库登入" class="headerlink" title="数据库登入"></a>数据库登入</h2><p>常用集成建站环境：XAMPP WAMP LAMP<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ mysql  -uroot -proot</span><br><span class="line">	 -P  端口</span><br><span class="line">	 -h  主机名</span><br><span class="line">$ prompt \D  日期</span><br><span class="line">	 \d  当前数据库</span><br><span class="line">	 \u  用户名</span><br><span class="line">	 \p  密码</span><br></pre></td></tr></table></figure></p>
+<h2 id="数据库的变量"><a href="#数据库的变量" class="headerlink" title="数据库的变量"></a>数据库的变量</h2><h3 id="Integer"><a href="#Integer" class="headerlink" title="Integer :"></a>Integer :</h3><p>(n)n的数字不管是多少，储存范围始终是每个类型规定的长度；TINYINT(1)和TINYINT(3)没区别，都占用1个字节。而使用ZEROFILL TINYINT(3)插入值9会显示 009 ；<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">TINYINT(<span class="string">'-2^7'</span>-128~<span class="string">'2^7-1'</span>127/8bit) </span><br><span class="line">无符号位数 0~255  1byte  默认TINYINT(4)</span><br><span class="line">SMALLINT(<span class="string">'-2^15'</span>-32768~<span class="string">'2^15-1'</span>32767/16bit) </span><br><span class="line">无符号位数 0~65535  2byte  默认SMALLINT(6)</span><br><span class="line">MEDIUMINT(<span class="string">'-2^23'</span>-8388608~<span class="string">'2^23-1'</span>8388607/24bit) </span><br><span class="line">无符号位数 0~16777215  3byte  默认MEDIUMINT(9)</span><br><span class="line">INT(<span class="string">'-2^31'</span>2147483648~<span class="string">'2^31-1'</span>2147483647/32bit) </span><br><span class="line">无符号位数 0~4294967295  4byte  默认INT(11)</span><br><span class="line">BIGINT(<span class="string">'-2^63'</span>9223372036854775808~<span class="string">'2^63-1'</span>9223372036854775807/64bit) </span><br><span class="line">无符号位数 0~18446744073709551616  8byte  默认BIGINT(20)</span><br></pre></td></tr></table></figure></p>
+<h3 id="String"><a href="#String" class="headerlink" title="String :"></a>String :</h3><p>(n)n的数字代表字符的长度，如VARCHAR(3)只能插入3个(中文、英文、数字)，E.g. : ‘你好吗’ ‘HEL’ ‘123’ ‘你H1’<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CHAR(n) 小于n则用空格补足</span><br><span class="line">VARCHAR(size) 占用刚好的字节，以及加上一个记录长度的字节,最大长度65535,8bit,去除2位长度记录位，65533.如有为空约束则65532位，空位占用1字节</span><br><span class="line">TEXT : 大文本</span><br><span class="line">FLOAT : DECIMAL FLOAT</span><br><span class="line">BLOB : 	BLOB 二进制字段类型</span><br></pre></td></tr></table></figure></p>
+<h2 id="数据库的操作"><a href="#数据库的操作" class="headerlink" title="数据库的操作"></a>数据库的操作</h2><ul>
+<li>可选</li>
+<li>NOT NULL :非空，不能为空</li>
+<li>UNSIGNED ：无符号位</li>
+<li>ZEROFILL ： 左边自动补0，并且强制无符号位，负数强制为0；</li>
+<li>DATABASE or SCHEMA </li>
+<li>ENGINE=InnoDB ： 指定存储引擎 （mysql支持 ： MyISAM InnoDB Memory CSV Archive BlackHole ）</li>
+<li>索引 ：普通索引、唯一索引、全文索引、btree索引、hash索引</li>
+<li>DEFAULT ： 默认</li>
+<li>CHARSET=utf8 ： 指定字符集</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">特点</th>
+<th style="text-align:center">MySIAM</th>
+<th style="text-align:center">InnoDB</th>
+<th style="text-align:center">Memory</th>
+<th style="text-align:center">Archive</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">储存限制</td>
+<td style="text-align:center">256TB</td>
+<td style="text-align:center">64TB</td>
+<td style="text-align:center">有</td>
+<td style="text-align:center">无</td>
+</tr>
+<tr>
+<td style="text-align:center">事务安全</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">支持</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">支持索引</td>
+<td style="text-align:center">支持</td>
+<td style="text-align:center">支持</td>
+<td style="text-align:center">支持</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">锁颗粒</td>
+<td style="text-align:center">表锁</td>
+<td style="text-align:center">行锁</td>
+<td style="text-align:center">表锁</td>
+<td style="text-align:center">行锁</td>
+</tr>
+<tr>
+<td style="text-align:center">数据压缩</td>
+<td style="text-align:center">支持</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">支持</td>
+</tr>
+<tr>
+<td style="text-align:center">支持外键</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">支持</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="增"><a href="#增" class="headerlink" title="增"></a>增</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">KEY:CREATE</span><br><span class="line">E.g. : CREATE DATABASE dataname;//创建数据库</span><br><span class="line">E.g. : CREATE DATABASE IF NOT EXISTS dataname [DEFAULT];创建数据库，忽略是否存在</span><br><span class="line">E.g. : CREATE DATABASE IF NOT EXISTS dataname CHARACTER SET [=] utf-8/gbk;//创建时设定编码</span><br></pre></td></tr></table></figure>
+<h3 id="删"><a href="#删" class="headerlink" title="删"></a>删</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">KEY:DROP</span><br><span class="line">E.g. : DROP DATABASE dataname;//删除数据库</span><br><span class="line">E.g. : DROP DATABASE IF EXISTS dataname;//删除数据库，忽略是否存在</span><br></pre></td></tr></table></figure>
+<h3 id="改"><a href="#改" class="headerlink" title="改"></a>改</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">KEY:ALTER</span><br><span class="line">E.g. : ALTER DATABASE dataname CHARACTER SET [=] utf8;//更改数据库编码</span><br></pre></td></tr></table></figure>
+<h3 id="查"><a href="#查" class="headerlink" title="查"></a>查</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">KEY:SHOW</span><br><span class="line">E.g. : SHOW DATABASES;//显示数据库</span><br><span class="line">E.g. : SHOW CREATE DATABASE dataname; //显示数据库结构</span><br><span class="line">E.g. : SHOW WARNINGS;//显示错误信息</span><br></pre></td></tr></table></figure>
+<h2 id="数据表操作"><a href="#数据表操作" class="headerlink" title="数据表操作"></a>数据表操作</h2><ul>
+<li>可选 约束</li>
+<li>tablename AS tableasname //别名约束</li>
+<li>UNIQUE //唯一约束</li>
+<li>UNSIGNED //无符号位约束  无负数</li>
+<li>NOT NULL //非空约束</li>
+<li>DEFAULT value //默认值设定</li>
+<li>PRIMARY KEY | PRIMARY KEY(colname)//主键约束</li>
+<li>FOREIGN KEY (foreign_colname) REFERENCES PROVINCES (primary_colname); //外键约束</li>
+<li>AUTO_INCREMENT //自动排序约束</li>
+<li>FURSR|AFTER colname //插入字段顺序设定</li>
+<li>/G 非表格显示记录</li>
+</ul>
+<h3 id="增-1"><a href="#增-1" class="headerlink" title="增"></a>增</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">KEY:CREATE</span><br><span class="line">E.g. : CREATE TABLE tablename(colname colproperty,...); //创建数据表，并指定至少一个字段</span><br><span class="line">E.g. : CREATE TABLE [IS NOT EXISTS] tablename(</span><br><span class="line">	colname colpeoperty constraints...,</span><br><span class="line">	colname colpeoperty constraints...,</span><br><span class="line">	)</span><br><span class="line">SELECT colname FROM tablename Condition;</span><br></pre></td></tr></table></figure>
+<h3 id="删-1"><a href="#删-1" class="headerlink" title="删"></a>删</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">KEY:DROP</span><br><span class="line">E.g. : DROP TABLE tablename; //删除数据表</span><br></pre></td></tr></table></figure>
+<h3 id="改-1"><a href="#改-1" class="headerlink" title="改"></a>改</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">KEY:ALTER &amp; RENAME</span><br><span class="line">E.g. : ALTER TABLE tablename ADD PRIMARY KEY(colname); //添加字段主键</span><br><span class="line">E.g. : ALTER TABLE tablename ADD colname colpeoperty; //添加字段约束</span><br><span class="line">E.g. : ALTER TABLE tablename ADD (colname colpeoperty,...); //添加多个字段的约束</span><br><span class="line">E.g. : ALTER TABLE tablename DROP colname,DROP ...; //删除一个或多个字段</span><br><span class="line">E.g. : ALTER TABLE tablename ALTER colname DROP DEFAULT; //删除字段默认值</span><br><span class="line">E.g. : ALTER TABLE tablename ALTER colname SET DEFAULT key; //设定字段默认值</span><br><span class="line">E.g. : RENAME TABLE old_tablename TO new_tablename; //更改表名</span><br><span class="line">E.g. : ALTER TABLE tablename MODIFY colname colproperty; //更改字段属性</span><br><span class="line">E.g. : ALTER TABLE tablename CHANGE old_colname new_colname colproperty; //更改字段名和属性，不更改属性写入一个原属性即可</span><br><span class="line">E.g. : ALTER TABLE tablename ADD colname colpeoperty ^,DROP colname,MODIFY colname colproperty;; //集添加删除更改字段的命令</span><br></pre></td></tr></table></figure>
+<h3 id="查-1"><a href="#查-1" class="headerlink" title="查"></a>查</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">KEY:SHOW &amp; DESC</span><br><span class="line">E.g. : DESC tablename; //查询表字段结构</span><br><span class="line">E.g. : SHOW COLUMNS FROM tablename; //查询表字段结构</span><br><span class="line">E.g. : SHOW CREATE TABLE tablename; //查询创建表字段结构</span><br></pre></td></tr></table></figure>
+<h2 id="数据字段操作"><a href="#数据字段操作" class="headerlink" title="数据字段操作"></a>数据字段操作</h2><ul>
+<li>INTO</li>
+<li>var _SELECT; //定义一个查询变量</li>
+<li>JOIN /CROSS JOIN/INNER JOIN 内连接 三个是等价的</li>
+<li>LEFT [OUTER] 左外连接 内连接中左表数据</li>
+<li>RIGHT [OUTER] JOIN 右外连接 内连接中右表数据</li>
+<li>ON 关键字是设定连接条件，也可以使用WHERE替代 </li>
+<li>WHERE 通常ON关键字用来设定连接条件，WHERE关键字用来进行结果集记录的过滤 </li>
+</ul>
+<h3 id="增-2"><a href="#增-2" class="headerlink" title="增"></a>增</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">KEY:INSERT</span><br><span class="line">E.g. : INSERT [INTO] tablename(colname,...) VALUE(field_key,...|DEFAULT);插入一行或多行数据到该表指定的多个字段，插入数据字段数目需与指定字段数目相同</span><br><span class="line">E.g. : INSERT tablename SET colname = field_key,...|DEFAULT; //插入一行或多行数据到该表指定字段，支持子查询；</span><br><span class="line">E.g. : INSERT tablename VALUES(field_key,...|DEFAULT),(....); //插入一行或多行数据到该表，插入数据字段数目需与表字段数目相同</span><br><span class="line">E.g. : INSERT tablename(colname,...) _SELECT ; //插入查询结果到该表</span><br></pre></td></tr></table></figure>
+<h3 id="删-2"><a href="#删-2" class="headerlink" title="删"></a>删</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">KEY:DELETE </span><br><span class="line">E.g. : DELETE FROM tablename; //删除该表所有字段数据</span><br><span class="line">E.g. : DELETE FROM tablename WHERE <span class="built_in">where</span>_condition; //删除该表字段内达到表达式结果的数据</span><br><span class="line">E.g. : DELETE FROM tablename WHERE colname=colkey; //删除该表字段内的某一行数据</span><br><span class="line">E.g. : DELETE t1 FROM tablename AS t1 LEFT JOIN (SELECT colname,... FROM tablename GROUP BY colnametong HAVING COUNT(goods_name)&gt;2) AS t2</span><br><span class="line">	ON t1.colname =  t2.colname WHERE t1.colnameid &gt;t2.colnameid;//多表删除，删除内表数据大于2重复的数据</span><br></pre></td></tr></table></figure>
+<h3 id="改-2"><a href="#改-2" class="headerlink" title="改"></a>改</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">KEY:UPDATE\INNER JOIN</span><br><span class="line">E.g. : UPDATE tablename SET colname = field_key,[colname = field_key,...];//更改所有的字段值</span><br><span class="line">E.g. : UPDATE tablename SET colname = field_key,[colname = field_key,...] WHERE <span class="built_in">where</span>_condition; //更改指定条件判断记录的字段值</span><br><span class="line">E.g. : UPDATE tablename INNER JOIN othertablename ON colname = othercolname// 外键优化，真实外键多表连接 查询到两表中相同的值，如遇到相同字段名则用别名解决，ON后方是连接条件 </span><br><span class="line">SET colname = othercolname_id; //把相同的值替换成外键中的id号，达到索引,多表连接</span><br></pre></td></tr></table></figure>
+<h3 id="查-2"><a href="#查-2" class="headerlink" title="查"></a>查</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">KEY:SELECT</span><br><span class="line">E.g. : SELECT USER(); //查询当前用户</span><br><span class="line">E.g. : SELECT VERSION(); //查询MYSQL版本</span><br><span class="line">E.g. : SELECT NOW(); //查询当前时间</span><br><span class="line">E.g. : SELECT condition; //查询表达式结果</span><br><span class="line">E.g. : SELECT username AS name FROM user;//给username起别名name </span><br><span class="line">E.g. : SELECT a.colname AS ascolname,u.colname,u.colname AS ascolname FROM tablename AS astablename, tablename2 AS astablename2 <span class="built_in">where</span> a.colname = u.colname;//多表别名查询</span><br><span class="line">E.g. : SELECT tablename.colname,... FROM tablename; //带表名的字段查找记录</span><br><span class="line">E.g. : SELECT tablename.colname,... FROM tablename WHERE <span class="built_in">where</span>_condition &gt;&lt;=! ANY (_SELECT) ; //子查询 ANY SOME最小值  ALL最大值 </span><br><span class="line">E.g. : SELECT colname [AS] temp_colname,... FROM tablename; //查找字段并且赋予字段别名后显示记录</span><br><span class="line">E.g. : SELECT colname,...|* FROM tablename; //普通查找字段或者所有字段的记录</span><br><span class="line">E.g. : SELECT t.colname,...,this.colname,... FROM tablename AS t  //单表连接查询   左or右连接</span><br><span class="line">	LEFT JOIN this.tablename AS this ON t.colname = this.colname  </span><br><span class="line">E.g. : SELECT colname,...,othercolname,... FROM tablename AS astablename  //多表连接查询</span><br><span class="line">	INNER JOIN othertablename AS asothertablename  ON astablename.colname = asothertablename.colname </span><br><span class="line">	INNER JOIN othertablename2 AS asothertablename2  ON astablename.colname2 = asothertablename.colname2 </span><br><span class="line">	...;</span><br><span class="line">E.g. : _SELECT = SELECT colname,...|* FROM tablename WHERE <span class="built_in">where</span>_condition //对查询结果进行表达式条件判断后输出结果；</span><br><span class="line">						     GROUP BY colname [(<span class="string">"Default"</span>ASC)|DESC] //对查询结果记录进行唯一分组</span><br><span class="line">						     HAVING <span class="built_in">where</span>_condition //基于GROUP BY分组进行分组后的查询结果记录再进行一次表达式条件设定，输出达到条件后的记录</span><br><span class="line">						     ORDER BY colname [(<span class="string">"Default"</span>ASC)|DESC],colname [(<span class="string">"Default"</span>ASC)|DESC] //对查询结果进行排序,如果有两个表达式，则在第一个表达式基础上再进行第二表达式的排序</span><br><span class="line">						     LIMIT index_num|index_num,index_num2; //限制返回的记录数量，单参数以数值为索引，而双参数第一个参数是索引为0算起开始到数值处开始显示结果，第二个参数是显示数目的意思，跟ID号不冲突，以结果索引为主。</span><br><span class="line">						     E.g. :LIMIT (2);//此时是从第一条记录到第二条记录 </span><br><span class="line">						     E.g. :LIMIT (5,7);//此时是从第六条记录开始显示到十二条记录，也就是共显示7条记录</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/05/25/MySQL的命令总结-一/">MySQL的命令总结(一)</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Bitamin Kim 的个人博客">Bitamin Kim</a></p>
+        <p><span>发布时间:</span>2016年05月25日 - 16时55分</p>
+        <p><span>最后更新:</span>2016年05月26日 - 18时33分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/05/25/MySQL的命令总结-一/" title="MySQL的命令总结(一)">http://bitaminkim.github.io/2016/05/25/MySQL的命令总结-一/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://bitaminkim.github.io/2016/05/25/MySQL的命令总结-一/　　作者: Bitamin Kim" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2016/05/27/MySQL的命令总结-二/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          MySQL的命令总结（二）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/05/25/新的开始/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">新的开始</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据库登入"><span class="toc-number">1.</span> <span class="toc-text">数据库登入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据库的变量"><span class="toc-number">2.</span> <span class="toc-text">数据库的变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Integer"><span class="toc-number">2.1.</span> <span class="toc-text">Integer :</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#String"><span class="toc-number">2.2.</span> <span class="toc-text">String :</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据库的操作"><span class="toc-number">3.</span> <span class="toc-text">数据库的操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#增"><span class="toc-number">3.1.</span> <span class="toc-text">增</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删"><span class="toc-number">3.2.</span> <span class="toc-text">删</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#改"><span class="toc-number">3.3.</span> <span class="toc-text">改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查"><span class="toc-number">3.4.</span> <span class="toc-text">查</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据表操作"><span class="toc-number">4.</span> <span class="toc-text">数据表操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#增-1"><span class="toc-number">4.1.</span> <span class="toc-text">增</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删-1"><span class="toc-number">4.2.</span> <span class="toc-text">删</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#改-1"><span class="toc-number">4.3.</span> <span class="toc-text">改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查-1"><span class="toc-number">4.4.</span> <span class="toc-text">查</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据字段操作"><span class="toc-number">5.</span> <span class="toc-text">数据字段操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#增-2"><span class="toc-number">5.1.</span> <span class="toc-text">增</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删-2"><span class="toc-number">5.2.</span> <span class="toc-text">删</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#改-2"><span class="toc-number">5.3.</span> <span class="toc-text">改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查-2"><span class="toc-number">5.4.</span> <span class="toc-text">查</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2016/05/25/MySQL的命令总结-一/" data-title="MySQL的命令总结(一)" data-url="http://bitaminkim.github.io/2016/05/25/MySQL的命令总结-一/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"BitaminKim"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '/js/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/05/27/MySQL的命令总结-二/" title="上一篇: MySQL的命令总结（二）">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2016/05/25/新的开始/" title="下一篇: 新的开始">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/05/27/MySQL的命令总结-二/">MySQL的命令总结（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/25/MySQL的命令总结-一/">MySQL的命令总结(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/25/新的开始/">新的开始</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/24/hello-world/">Hello World</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 Bitamin Kim
+            </div>
+            <div class="footer-right">
+                <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=0 height=0 src="http://music.163.com/outchain/player?type=2&id=413961906&auto=1&height=66"></iframe> -->
+		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/Bitaminkim/hexo-theme-Rem" target="_blank">Rem</a> by BitaminKim
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 7;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

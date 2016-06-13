@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>MySQL的命令总结（二） | Bitamin Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="数据库的命令行函数使用总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL的命令总结（二）">
+<meta property="og:url" content="http://bitaminkim.github.io/2016/05/27/MySQL的命令总结-二/index.html">
+<meta property="og:site_name" content="Bitamin Blog">
+<meta property="og:description" content="数据库的命令行函数使用总结">
+<meta property="og:updated_time" content="2016-05-27T07:24:24.527Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL的命令总结（二）">
+<meta name="twitter:description" content="数据库的命令行函数使用总结">
+  
+    <link rel="alternative" href="/rss.xml" title="Bitamin Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">Bitamin Kim</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">黄东鹏</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">首页</a></li>
+                        
+                            <li><a href="/Works">作品</a></li>
+                        
+                            <li><a href="/About">简历</a></li>
+                        
+                            <li><a href="/Life">生活</a></li>
+                        
+                            <li><a href="/Like">兴趣</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=w-X3_vvw_vb08oOysu2grK4" title="mail">mail</a>
+                            
+                                <a class="fl coding" target="_blank" href="https://coding.net/u/BitaminKim" title="coding">coding</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/BitaminKim" title="github">github</a>
+                            
+                                <a class="fl stackoverflow" target="_blank" href="http://stackoverflow.com/users/6459971/%E9%BB%84%E4%B8%9C%E9%B9%8F" title="stackoverflow">stackoverflow</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="https://www.zhihu.com/people/huangdongpeng" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="http://weibo.com/lookhackerss" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="https://plus.google.com/u/0/101979608232235486497" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="https://twitter.com/huangdongpeng" title="twitter">twitter</a>
+                            
+                                <a class="fl facebook" target="_blank" href="https://www.facebook.com/huangdongpeng" title="facebook">facebook</a>
+                            
+                                <a class="fl Instagram" target="_blank" href="https://www.instagram.com/bitamin.kim" title="Instagram">Instagram</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="https://www.linkedin.com/in/%e4%b8%9c%e9%b9%8f-%e9%bb%84-a46482109" title="linkedin">linkedin</a>
+                            
+                                <a class="fl soundcloud" target="_blank" href="https://soundcloud.com/dp-kim" title="soundcloud">soundcloud</a>
+                            
+                                <a class="fl QQ" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=649839571&site=qq&menu=yes" title="QQ">QQ</a>
+                            
+                                <a class="fl wechat" target="_blank" href="/img/Wechatjpg.jpg" title="wechat">wechat</a>
+                            
+                                <a class="fl rss" target="_blank" href="/rss.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/开始/" style="font-size: 10px;">开始</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="/archives">所有文章</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://MOxFIVE.github.io/">MOxFIVE</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.vsay.cn/">DoubleV</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.ccwebsite.com/">兮兮</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.dandyweng.com/">翁天信</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.plqblog.com/views/index.php">潘利强</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.hankin.cn/">hankin</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.waydrow.com/">waydrow</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">动漫宅、技术宅、眼镜男、喜欢风景、喜欢游戏、喜欢音乐(Electronic Music)、喜欢旅游、向往外国极限运动。</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Bitamin Kim</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Bitamin Kim</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">黄东鹏</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">首页</a></li>
+                
+                    <li><a href="/Works">作品</a></li>
+                
+                    <li><a href="/About">简历</a></li>
+                
+                    <li><a href="/Life">生活</a></li>
+                
+                    <li><a href="/Like">兴趣</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=w-X3_vvw_vb08oOysu2grK4" title="mail">mail</a>
+                    
+                        <a class="coding" target="_blank" href="https://coding.net/u/BitaminKim" title="coding">coding</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/BitaminKim" title="github">github</a>
+                    
+                        <a class="stackoverflow" target="_blank" href="http://stackoverflow.com/users/6459971/%E9%BB%84%E4%B8%9C%E9%B9%8F" title="stackoverflow">stackoverflow</a>
+                    
+                        <a class="zhihu" target="_blank" href="https://www.zhihu.com/people/huangdongpeng" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="http://weibo.com/lookhackerss" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="https://plus.google.com/u/0/101979608232235486497" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="https://twitter.com/huangdongpeng" title="twitter">twitter</a>
+                    
+                        <a class="facebook" target="_blank" href="https://www.facebook.com/huangdongpeng" title="facebook">facebook</a>
+                    
+                        <a class="Instagram" target="_blank" href="https://www.instagram.com/bitamin.kim" title="Instagram">Instagram</a>
+                    
+                        <a class="linkedin" target="_blank" href="https://www.linkedin.com/in/%e4%b8%9c%e9%b9%8f-%e9%bb%84-a46482109" title="linkedin">linkedin</a>
+                    
+                        <a class="soundcloud" target="_blank" href="https://soundcloud.com/dp-kim" title="soundcloud">soundcloud</a>
+                    
+                        <a class="QQ" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=649839571&site=qq&menu=yes" title="QQ">QQ</a>
+                    
+                        <a class="wechat" target="_blank" href="/img/Wechatjpg.jpg" title="wechat">wechat</a>
+                    
+                        <a class="rss" target="_blank" href="/rss.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-MySQL的命令总结-二" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/27/MySQL的命令总结-二/" class="article-date">
+      <time datetime="2016-05-27T07:04:49.000Z" itemprop="datePublished">2016-05-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MySQL的命令总结（二）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/开发/">开发</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>数据库的命令行函数使用总结</p>
+<a id="more"></a>
+<h2 id="MySql的函数"><a href="#MySql的函数" class="headerlink" title="MySql的函数"></a>MySql的函数</h2><ul>
+<li>函数支持嵌套</li>
+<li>METHOD(METHOD(KEY,…),…);</li>
+<li>SET NAMES GBK;设置客户端字符集</li>
+<li>SET PASSWORD=PASSWORD(‘password’); 设置mysql密码</li>
+<li>DELIMITER // 修改结束符为//。可修改结束符号</li>
+</ul>
+<h3 id="字符函数"><a href="#字符函数" class="headerlink" title="字符函数"></a>字符函数</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">KEY:CONCAT() | CONCAT_WS()</span><br><span class="line">E.g. : SELECT CONCAT(<span class="string">'CHAR'</span>,<span class="string">'CHAR'</span>,...); //输出字符连接后的记录</span><br><span class="line">E.g. : SELECT CONCAT(colname,colname2,...) FROM table;//输出多个字段值连接后的记录</span><br><span class="line">E.g. : SELECT CONCAT_WS(<span class="string">'|'</span>,<span class="string">'CHAR'</span>,<span class="string">'CHAR'</span>,...);//输出使用第一个参数分隔符进行字符的连接</span><br><span class="line">E.g. : SELECT CONCAT_WS(<span class="string">'-'</span>,<span class="string">'colname'</span>,<span class="string">'colname2'</span>,...) FROM tablename;//colname-colname2 输出使用第一个参数分隔符进行字段值的连接</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">KEY:FORMAT()</span><br><span class="line">E.g. : SELECT FORMAT(key,parameter); //数字格式化 参数一是值，参数二是取整位数  RETURN </span><br><span class="line">SELECT FORMAT(12345.678,2) 12,345.68</span><br><span class="line">SELECT FORMAT(12345.678,1) 12,345.7  </span><br><span class="line">SELECT FORMAT(12345.678,0) 12,346</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">KEY:LOWER() | UPPER()</span><br><span class="line">E.g. : SELECT LOWER(&apos;CHAR&apos;); //转换小写</span><br><span class="line">E.g. : SELECT UPPER(&apos;char&apos;); //转换大写</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">KEY:LEFT() | RIGHT()</span><br><span class="line">E.g. : SELECT LEFT(&apos;CHAR&apos;,parameter);// 取值的左parameter位 </span><br><span class="line">E.g. : SELECT RIGHT(&apos;CHAR&apos;,parameter);// 取值的右parameter位</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">KEY: LENGTH() | LTRIM() | RTRIM() | (TRIM() | LEADING | TRAILING | BOTH) | REPLACE() | SUBSTRING() | (LIKE | ESCAPE)</span><br><span class="line"></span><br><span class="line">E.g. : SELECT LENGTH(&apos;CH AR&apos;);// 获取字符长度,包含空格。RETURN 5</span><br><span class="line">E.g. : SELECT LTRIM(&apos;      CHAR    &apos;); // 删除字符串前方的空格 RETURN (&apos;CHAR    &apos;)</span><br><span class="line">E.g. : SELECT RTRIM(&apos;      CHAR    &apos;); // 删除字符串后方的空格 RETURN (&apos;     CHAR&apos;)</span><br><span class="line">E.g. : SELECT TRIM(&apos;      CHAR    &apos;); // 删除字符串前后方的空格 RETURN (&apos;CHAR&apos;)</span><br><span class="line">E.g. : SELECT TRIM(LEADING&apos;?&apos; FROM &apos;??CHAR????&apos;); //删除字符串前方指定的字符 RETURN (&apos;CHAR????&apos;)</span><br><span class="line">E.g. : SELECT TRIM(TRAILING&apos;?&apos; FROM &apos;??CHAR????&apos;); //删除字符串后方指定的字符 RETURN (&apos;??CHAR&apos;)</span><br><span class="line">E.g. : SELECT TRIM(BOTH&apos;?&apos; FROM &apos;??CHAR????&apos;); //删除字符串前后方指定的字符 RETURN (&apos;CHAR&apos;)</span><br><span class="line">E.g. : SELECT REPLACE(&apos;??CH??AR???&apos;,&apos;?|??&apos;,&apos;^&apos;); //替换字符串中指定的字符为另外一个字符 RETURN (&apos;^^CH^^AR^^^&apos;) | (&apos;^CH^AR^?&apos;)</span><br><span class="line">E.g. : SELECT SUBSTRING(&apos;VARCHAR&apos;,3); //输出字符串指定位置开始的记录到结束，索引从1开始算起非0算起。 RETURN (&apos;RCHAR&apos;)</span><br><span class="line">E.g. : SELECT SUBSTRING(&apos;VARCHAR&apos;,-2); //输出字符串从结尾往回算起到负数位置，索引从-1开始算起非0算起。 RETURN (&apos;AR&apos;) 负数代表反向</span><br><span class="line">E.g. : SELECT SUBSTRING(&apos;VARCHAR&apos;,3,4); //输出字符串指定位置开始的记录到参数的个数，索引从1开始算起非0算起。 RETURN (&apos;RCHA&apos;) ：显示4个字符</span><br><span class="line">E.g. : SELECT &apos;MySQL&apos; LIKE &apos;%yS%&apos;; //返回布尔类型 ，值为1，代表true  。意思为字符串中有like后面包含的字符，</span><br><span class="line">E.g. : SELECT * FROM tablename WHERE colname LIKE &apos;%?%&apos;; //意思为查找表内字段中含有?的字符串，%、_为通配符， %为任意个字符 _为任意一个字符 </span><br><span class="line">E.g. : SELECT * FROM tablename WHERE colname LIKE &apos;%1%%&apos; ESCAPE &apos;1&apos;; //意思为查找表内字段中含有%的字符串，%为通配符的同时，用ESCAPE关键字告诉SQL&apos;1&apos;后面的字符为字符而不是通配符。</span><br></pre></td></tr></table></figure>
+<h3 id="数值运算符函数"><a href="#数值运算符函数" class="headerlink" title="数值运算符函数"></a>数值运算符函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">KEY: SEIL() | FLOOR() | DIV | MOD | POWER() | ROUND() | TRUNCATE()</span><br><span class="line"></span><br><span class="line">E.g. : SELECT SEIL(3.01); 向上取整 RETURN 4</span><br><span class="line">E.g. : SELECT FLOOR(3.99); 向下取整 RETURN 3</span><br><span class="line">E.g. : SELECT 3 DIV 4; //整除 RETURN 0 :答案3除以4等于0.75，而整除是舍弃小数</span><br><span class="line">E.g. : SELECT 5 MOD 4; //取余 （取模）  RETURN 1 , 跟%取模相同</span><br><span class="line">E.g. : SELECT POWER(3,3); //次方运算 RETURN 27 ,3的3次方。</span><br><span class="line">E.g. : SELECT ROUND(32.652，2); // 四舍五入数值 RETURN 32.65 ,后方数值为小数位数。</span><br><span class="line">E.g. : SELECT TRUNCATE(125.898,2) // 数字截取 RETURN 125.89 ,不同于四舍五入，单纯减少小数点后位数，为0则没小数。负数可以去截取整数部分。(125.898,-1) RETURN 120</span><br></pre></td></tr></table></figure>
+<h3 id="比较运算符函数"><a href="#比较运算符函数" class="headerlink" title="比较运算符函数"></a>比较运算符函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">KEY: [NOT] BETWEEN ... AND | IN() | IS NULL</span><br><span class="line"></span><br><span class="line">E.g. : SELECT 15 [NOT] BETWEEN 1 AND 22; //查询数字是否在后方所指值的范围内，返回布尔类型 。 RETURN 1,加上NOT则是取反;</span><br><span class="line">E.g. : SELECT 15 [NOT] IN(5,8,10,15,20,22); //查询值是否在后续指定的值里面，与枚举类似，返回布尔类型。 RETURN 1 ,加上NOT则是取反;</span><br><span class="line">E.g. : SELECT NULL IS NULL ; //查询一个值是否为空，返回布尔类型 RETURN 1，SELECT &apos;&apos; IS NULL;RETURN 0 ,加上NOT则是取反；</span><br><span class="line">E.g. : SELECT * FROM tablename WHERE colname IS NULL ; //可以用来查询表中字段为空或者非空的值记录</span><br></pre></td></tr></table></figure>
+<h3 id="日期时间函数"><a href="#日期时间函数" class="headerlink" title="日期时间函数"></a>日期时间函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">KEY: NOW() | CURDATE() | CURTIME() | DATE_ADD(&apos;DATE&apos;,INTERVAL 000 (YEAR|MONTH|WEEK|DAY) | DATEDIFF(&apos;DATE&apos;,&apos;DATE&apos;) | DATE_FORMAT(&apos;DATE&apos;,&apos;%m[]%d[]%Y&apos;)</span><br><span class="line"></span><br><span class="line">E.g. : SELECT NOW();</span><br><span class="line">E.g. : SELECT CURDATE(); // 输出日期 RETURN 0000-00-00</span><br><span class="line">E.g. : SELECT CURTIME(); // 输出时间 RETURN 00:00:00</span><br><span class="line">E.g. : SELECT DATE_ADD(&apos;2014-3-12&apos;,INTERVAL 365 DAY); //给当前值日期添加365天时间 RETURN 2015-03-12 ,也可以减少时间日期 (&apos;2014-3-12&apos;,INTERVAL -365 DAY);RETURN 2013-03-12</span><br><span class="line">E.g. : SELECT DATEDIFF(&apos;2013-3-12&apos;,&apos;2014-3-12&apos;); //求两个日期值的天数差值 RETURN -365  意思左边少于右边几天</span><br><span class="line">E.g. : SELECT DATE_FORMAT(&apos;2014-3-12&apos;,&apos;%m/%d/%Y&apos;); //格式化日期并且输出查询结果，%为通配符转义字符 %Y年%m月%d日 H点:%i分:%s秒</span><br></pre></td></tr></table></figure>
+<h3 id="信息函数"><a href="#信息函数" class="headerlink" title="信息函数"></a>信息函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">KEY: CONNECTION_ID() | DATEBASE() | LAST_INSERT_ID() | USER() | VERSION()</span><br><span class="line"></span><br><span class="line">E.g. : SELECT CONNECTION_ID(); //查询连接ID  RETURN </span><br><span class="line">E.g. : SELECT DATEBASE(); //查询当前使用的数据库 RETURN databasename</span><br><span class="line">E.g. : SELECT LAST_INSERT_ID(); //查询最后插入记录的ID号 RETURN 最后操作的表中的ID号；多条操作的情况，以语句操作的第一条ID为准，后续ID忽略</span><br><span class="line">E.g. : SELECT USER(); //查询当前的用户 RETURN root@localhost</span><br><span class="line">E.g. : SELECT VERSION(); //查询当前版本信息 RETURN 5.7.11-log</span><br></pre></td></tr></table></figure>
+<h3 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">KEY: AVG() | COUNT() | MAX() | MIN() | SUM()</span><br><span class="line"></span><br><span class="line">E.g. : SELECT AVG(colname) AS ascolname FROM tablename;// 可用于查找计算出字段数值的平均值 RETURN keyavg</span><br><span class="line">E.g. : SELECT COUNT(colname) AS ascolname FROM tablename;// 可用于查找计算出字段数值的记录数 RETURN keycount</span><br><span class="line">E.g. : SELECT MAX(colname) AS ascolname FROM tablename;// 可用于查找计算出字段数值的最大值 RETURN keymax</span><br><span class="line">E.g. : SELECT MIN(colname) AS ascolname FROM tablename;// 可用于查找计算出字段数值的最小值 RETURN keymin</span><br><span class="line">E.g. : SELECT SUM(colname) AS ascolname FROM tablename;// 可用于查找计算出字段数值的和 RETURN keysum</span><br></pre></td></tr></table></figure>
+<h3 id="加密函数"><a href="#加密函数" class="headerlink" title="加密函数"></a>加密函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">KEY: MD5() | PASSWORD()</span><br><span class="line"></span><br><span class="line">E.g. : SELECT MD5(&apos;VARCHAR&apos;); //MD5加密，WEB应用建议MD5加密密码 </span><br><span class="line">E.g. : SELECT PASSWORD(&apos;VARCHAR&apos;); //PASSWORD加密，可修改当前或者其他用户密码</span><br></pre></td></tr></table></figure>
+<h3 id="自定义函数"><a href="#自定义函数" class="headerlink" title="自定义函数"></a>自定义函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">KEY: CREATE | FUNCTION | RETURNS | &#123;SYROMH|INTEGER|REAL|DECIMAL&#125; RETURN |BEGIN END</span><br><span class="line"></span><br><span class="line">E.g. : CREATE FUNCTION NOWCHINA() RETURNS VARCHAR(30) RETURN DATE_FORMAT(NOW(),&apos;%Y年%m月%d日 H点:%i分:%s秒&apos;); //创建了一个封装了格式化过的现在日期时间函数</span><br><span class="line">E.g. : CREATE FUNCTION AVG1(num1 SMALLINT UNSIGNED,num2 SMALLINT UNSIGNED[,...]) RETURNS FLOAT(10,2) UNSIGNED RETURN (num1+num2)/2; //创建了一个计算num1和num2平均值的函数</span><br><span class="line">E.g. : DELIMITER //</span><br><span class="line">	   CREATE FUNCTION ADDUSER(username VARCHAR(20)[,...]) RETURNS INT UNSIGNED BEGIN INSERT test(username) VALUES(username);  //带复合结构BEGINEND的函数，复合函数用于包含拥有多条SQL语句的作用</span><br><span class="line">									RETURN LAST_INSERT_ID();</span><br><span class="line">									END//      //可以使用ADDUSER(传参,...);来调用。并且返回了一个INT类型的id号</span><br></pre></td></tr></table></figure>
+<h3 id="创建储存过程"><a href="#创建储存过程" class="headerlink" title="创建储存过程"></a>创建储存过程</h3><ul>
+<li><p>存储过程是mysql语句和控制语句的预编译集合体</p>
+</li>
+<li><p>BEGINEND内属于局部变量</p>
+</li>
+<li><p>@属于用户变量 SET @i = 8;  SELECT @i; RETURN 8;</p>
+</li>
+<li><p>SELECT ROW_COUNT() INTO colname;  查询处理的记录数</p>
+</li>
+<li><p>COUNT(colname) 查询处理后的记录数</p>
+</li>
+<li><p>储存过程可以有多个返回值，功能更复杂，独立运行  函数只能有一个返回值 针对性强 函数依靠其他函数组成 </p>
+</li>
+<li><p>储存过程不能修改过程体，只能修改参数属性值  如需要修改过程体需要删除后重建</p>
+</li>
+<li><p>创建储存过程或者自定义函数的时候都需要通过DELIMITER修改结束符（定界符），否则无法完成BEGIN内的SQL语句书写。如果函数体和过程体内有多个语句需要包含在BEGINEND内，存储过程需要通过CALL来调用，且函数名建议使用括号结尾</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">KEY: CREATE | DROP | ALTER | PROCEDURE | DEFINER |      IN | OUT | INOUT    CALL  | @</span><br><span class="line"></span><br><span class="line">E.g. : CREATE [DEFINER = &#123;user | CURRENT_USER &#125;] PROCEDURE sp_name ([proc_parameter[,...]]) [characteristic ...] routine_body</span><br><span class="line">E.g. : CREATE PROCEDURE sp_name() SELECT NOW();   CALL sp_name;// 声明一个无参储存过程，通过CALL 过程名来输出当前时间。无参数的时候调用过程名字括号可加可不加</span><br><span class="line">E.g. : DROP PROCEDURE removeUserById; //删除储存过程方法;</span><br></pre></td></tr></table></figure>
+<p>​</p>
+<h4 id="E-g-DELIMITER"><a href="#E-g-DELIMITER" class="headerlink" title="E.g. : DELIMITER //"></a>E.g. : DELIMITER //</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE PROCEDURE removeUserById(IN id INT UNSIGNED) // IN 单参数传入 ，此关键字说明此方法只传入参数处理数据，而无需返回结果</span><br><span class="line">BEGIN</span><br><span class="line">DELETE FROM users WHERE id = id; //声明传参名时不可跟表单重名，建议使用表头字母_id来声明 x_id  </span><br><span class="line">END// //创建一个封装了删除表指定字段的储存过程方法 ，传入值。  此处id定义重复，有出错，需修改id。从此看出，在写过程中不可重复声明</span><br><span class="line">DELIMITER ;   //CALL removeUserById(4); 使用CALL来调用方法删除指定的ID行</span><br></pre></td></tr></table></figure>
+<p>​</p>
+<h4 id="E-g-DELIMITER-单参数传入-单参数返回"><a href="#E-g-DELIMITER-单参数传入-单参数返回" class="headerlink" title="E.g. : DELIMITER //   单参数传入 单参数返回"></a>E.g. : DELIMITER //   单参数传入 单参数返回</h4><pre><code>CREATE PROCEDURE removeUserById(IN p_id INT UNSIGNED，OUT userNums INT UNSIGNED) // IN 传入参数 ，OUT返回结果 ，此关键字说明此方法传入参数后并且规定返回指定类型结果
+BEGIN
+DELETE FROM users WHERE id = p_id; //声明传参名时不可跟表单重名，建议使用表头字母_id来声明 x_id  .此语句为执行删除传入id的id行数据；
+SELECT count(id) FROM users INTO userNums; //此语句为，上语句删除完毕后，查询删除后现id字段的计数，并且传输结果给userNums返回出值
+END//
+DELIMITER ; // 调用过程需要传入接受返回值的变量 CALL removeUserAndReturnUserNums(10,@nums);  此时数值被写入到 @nums变量，可通过SELECT @nums来查询   @是一种声明用户变量   BEGINEND内可声明局部变量
+</code></pre><h4 id="E-e-DELIMITER-单参数传入-多参数返回"><a href="#E-e-DELIMITER-单参数传入-多参数返回" class="headerlink" title="E.e. : DELIMITER //    单参数传入   多参数返回"></a>E.e. : DELIMITER //    单参数传入   多参数返回</h4><pre><code>CREATE PROCEDURE removeUserByAgeAndReturnInfos(IN p_age SMALLINT UNSIGNED O,OUT deleteUser SMALLINT UNSIGNED,OUT userCounts SMALLINT UNSIGNED)
+BEGIN
+DELETE FROM users WHERE age = p_age; // 删除掉表内匹配p_age的一行数据 参数用了IN，所以不用返回值，只需处理传入值
+SELECT ROU_COUNT() INTO deleteUsers; //查询更改的数量。并把数值返回给deleteUsers接收，以供后续传值到其他变量中查询
+SELECT COUNT(id) FROM users INTO userCounts; //查询来自users表中更改后剩下的ID计数，并返回结果给userCounts接收
+END//
+DELIMITER ; //使用CALL removeUserByAgeAndReturnInfos(20,@a,@b); SELECT @a,@b; RETURN 处理数 处理后计数 
+</code></pre></li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/05/27/MySQL的命令总结-二/">MySQL的命令总结（二）</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Bitamin Kim 的个人博客">Bitamin Kim</a></p>
+        <p><span>发布时间:</span>2016年05月27日 - 15时04分</p>
+        <p><span>最后更新:</span>2016年05月27日 - 15时24分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/05/27/MySQL的命令总结-二/" title="MySQL的命令总结（二）">http://bitaminkim.github.io/2016/05/27/MySQL的命令总结-二/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://bitaminkim.github.io/2016/05/27/MySQL的命令总结-二/　　作者: Bitamin Kim" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2016/05/25/MySQL的命令总结-一/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">MySQL的命令总结(一)</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#MySql的函数"><span class="toc-number">1.</span> <span class="toc-text">MySql的函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#字符函数"><span class="toc-number">1.1.</span> <span class="toc-text">字符函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数值运算符函数"><span class="toc-number">1.2.</span> <span class="toc-text">数值运算符函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#比较运算符函数"><span class="toc-number">1.3.</span> <span class="toc-text">比较运算符函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#日期时间函数"><span class="toc-number">1.4.</span> <span class="toc-text">日期时间函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#信息函数"><span class="toc-number">1.5.</span> <span class="toc-text">信息函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#聚合函数"><span class="toc-number">1.6.</span> <span class="toc-text">聚合函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#加密函数"><span class="toc-number">1.7.</span> <span class="toc-text">加密函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义函数"><span class="toc-number">1.8.</span> <span class="toc-text">自定义函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建储存过程"><span class="toc-number">1.9.</span> <span class="toc-text">创建储存过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#E-g-DELIMITER"><span class="toc-number">1.9.1.</span> <span class="toc-text">E.g. : DELIMITER //</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#E-g-DELIMITER-单参数传入-单参数返回"><span class="toc-number">1.9.2.</span> <span class="toc-text">E.g. : DELIMITER //   单参数传入 单参数返回</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#E-e-DELIMITER-单参数传入-多参数返回"><span class="toc-number">1.9.3.</span> <span class="toc-text">E.e. : DELIMITER //    单参数传入   多参数返回</span></a></li></ol></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2016/05/27/MySQL的命令总结-二/" data-title="MySQL的命令总结（二）" data-url="http://bitaminkim.github.io/2016/05/27/MySQL的命令总结-二/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"BitaminKim"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '/js/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2016/05/25/MySQL的命令总结-一/" title="下一篇: MySQL的命令总结(一)">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/05/27/MySQL的命令总结-二/">MySQL的命令总结（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/25/MySQL的命令总结-一/">MySQL的命令总结(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/25/新的开始/">新的开始</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/24/hello-world/">Hello World</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 Bitamin Kim
+            </div>
+            <div class="footer-right">
+                <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=0 height=0 src="http://music.163.com/outchain/player?type=2&id=413961906&auto=1&height=66"></iframe> -->
+		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/Bitaminkim/hexo-theme-Rem" target="_blank">Rem</a> by BitaminKim
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 7;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
