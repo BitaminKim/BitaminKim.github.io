@@ -1,0 +1,20 @@
+/*
+* @Author: bitam
+* @Date:   2017-01-10 00:18:20
+* @Last Modified by:   bitam
+* @Last Modified time: 2017-01-10 00:51:45
+*/
+
+'use strict';
+var wechat = document.getElementByClassName("fl wechat");
+wechat.setAttribute("onclick","openQRimg()");
+function openQRimg(){
+
+	var bodyNode = document.getElementsByTagName("body")[0];
+	var divNode = document.createElement("div");
+	divNode.setAttribute("class","divOpenQRimg");
+	var imgNode = document.createElement("td");
+	imgNode.innerHTML = "<img src='/img/Wechatjpg.jpg'/>";
+	divNode.appendChild(imgNode);
+	bodyNode.appendChild(divNode);
+}

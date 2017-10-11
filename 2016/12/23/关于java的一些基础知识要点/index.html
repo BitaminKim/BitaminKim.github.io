@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>关于java的一些基础知识要点 | Bitamin Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="JAVA的一些知识要点">
+<meta name="keywords" content="JAVA,集合,泛型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于java的一些基础知识要点">
+<meta property="og:url" content="http://bitamin.pw/2016/12/23/关于java的一些基础知识要点/index.html">
+<meta property="og:site_name" content="Bitamin Blog">
+<meta property="og:description" content="JAVA的一些知识要点">
+<meta property="og:updated_time" content="2016-12-25T10:34:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于java的一些基础知识要点">
+<meta name="twitter:description" content="JAVA的一些知识要点">
+  
+    <link rel="alternative" href="/rss.xml" title="Bitamin Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">Bitamin Kim</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">黄东鹏</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">首页</a></li>
+                        
+                            <li><a href="/Works">作品</a></li>
+                        
+                            <li><a href="/About">简历</a></li>
+                        
+                            <li><a href="/Life">生活</a></li>
+                        
+                            <li><a href="/Like">兴趣</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=w-X3_vvw_vb08oOysu2grK4" title="mail">mail</a>
+                            
+                                <a class="fl coding" target="_blank" href="https://coding.net/u/BitaminKim" title="coding">coding</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/BitaminKim" title="github">github</a>
+                            
+                                <a class="fl stackoverflow" target="_blank" href="http://stackoverflow.com/users/6459971/%E9%BB%84%E4%B8%9C%E9%B9%8F" title="stackoverflow">stackoverflow</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="https://www.zhihu.com/people/huangdongpeng" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="http://weibo.com/lookhackerss" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="https://plus.google.com/u/0/101979608232235486497" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="https://twitter.com/huangdongpeng" title="twitter">twitter</a>
+                            
+                                <a class="fl facebook" target="_blank" href="https://www.facebook.com/huangdongpeng" title="facebook">facebook</a>
+                            
+                                <a class="fl Instagram" target="_blank" href="https://www.instagram.com/bitamin.kim" title="Instagram">Instagram</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="https://www.linkedin.com/in/%e4%b8%9c%e9%b9%8f-%e9%bb%84-a46482109" title="linkedin">linkedin</a>
+                            
+                                <a class="fl soundcloud" target="_blank" href="https://soundcloud.com/dp-kim" title="soundcloud">soundcloud</a>
+                            
+                                <a class="fl QQ" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=649839571&site=qq&menu=yes" title="QQ">QQ</a>
+                            
+                                <a class="fl wechat" target="_blank" href="/img/Wechatjpg.jpg" title="wechat">wechat</a>
+                            
+                                <a class="fl rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Css/" style="font-size: 10px;">Css</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/Domain/" style="font-size: 10px;">Domain</a> <a href="/tags/Html/" style="font-size: 10px;">Html</a> <a href="/tags/JAVA/" style="font-size: 10px;">JAVA</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/MySQL-PHP/" style="font-size: 10px;">MySQL PHP</a> <a href="/tags/MySQL-PHP-JS-RequireJs/" style="font-size: 10px;">MySQL PHP JS RequireJs</a> <a href="/tags/coding/" style="font-size: 10px;">coding</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/开始/" style="font-size: 10px;">开始</a> <a href="/tags/泛型/" style="font-size: 10px;">泛型</a> <a href="/tags/集合/" style="font-size: 10px;">集合</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="/archives">所有文章</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://MOxFIVE.github.io/">MOxFIVE</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.vsay.cn/">DoubleV</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.ccwebsite.com/">兮兮</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.dandyweng.com/">翁天信</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.plqblog.com/views/index.php">潘利强</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.hankin.cn/">hankin</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.waydrow.com/">waydrow</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">动漫宅、技术宅、眼镜男、喜欢风景、喜欢游戏、喜欢音乐(Electronic Music)、喜欢旅游、向往外国极限运动。</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Bitamin Kim</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Bitamin Kim</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">黄东鹏</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">首页</a></li>
+                
+                    <li><a href="/Works">作品</a></li>
+                
+                    <li><a href="/About">简历</a></li>
+                
+                    <li><a href="/Life">生活</a></li>
+                
+                    <li><a href="/Like">兴趣</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=w-X3_vvw_vb08oOysu2grK4" title="mail">mail</a>
+                    
+                        <a class="coding" target="_blank" href="https://coding.net/u/BitaminKim" title="coding">coding</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/BitaminKim" title="github">github</a>
+                    
+                        <a class="stackoverflow" target="_blank" href="http://stackoverflow.com/users/6459971/%E9%BB%84%E4%B8%9C%E9%B9%8F" title="stackoverflow">stackoverflow</a>
+                    
+                        <a class="zhihu" target="_blank" href="https://www.zhihu.com/people/huangdongpeng" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="http://weibo.com/lookhackerss" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="https://plus.google.com/u/0/101979608232235486497" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="https://twitter.com/huangdongpeng" title="twitter">twitter</a>
+                    
+                        <a class="facebook" target="_blank" href="https://www.facebook.com/huangdongpeng" title="facebook">facebook</a>
+                    
+                        <a class="Instagram" target="_blank" href="https://www.instagram.com/bitamin.kim" title="Instagram">Instagram</a>
+                    
+                        <a class="linkedin" target="_blank" href="https://www.linkedin.com/in/%e4%b8%9c%e9%b9%8f-%e9%bb%84-a46482109" title="linkedin">linkedin</a>
+                    
+                        <a class="soundcloud" target="_blank" href="https://soundcloud.com/dp-kim" title="soundcloud">soundcloud</a>
+                    
+                        <a class="QQ" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=649839571&site=qq&menu=yes" title="QQ">QQ</a>
+                    
+                        <a class="wechat" target="_blank" href="/img/Wechatjpg.jpg" title="wechat">wechat</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-关于java的一些基础知识要点" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/12/23/关于java的一些基础知识要点/" class="article-date">
+      <time datetime="2016-12-23T07:04:49.000Z" itemprop="datePublished">2016-12-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      关于java的一些基础知识要点
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/开发/">开发</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA/">JAVA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/泛型/">泛型</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/集合/">集合</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>JAVA的一些知识要点</p>
+<a id="more"></a>
+<h2 id="关于集合和泛型"><a href="#关于集合和泛型" class="headerlink" title="关于集合和泛型"></a>关于集合和泛型</h2><h3 id="集合常用类"><a href="#集合常用类" class="headerlink" title="集合常用类"></a>集合常用类</h3><ol>
+<li><p>Collection 单列集合根接口</p>
+<ol>
+<li>List 有序的，可以重复<ol>
+<li>ArrayList 底层代码使用了Object数组实现，特点在查询速度快，增删慢</li>
+<li>LinkedList 底层代码用的是链表数据结构实现，特点在查询速度慢，增删快</li>
+<li>Vector 底层跟ArrayList一样用的Object数组实现，但是线程是安全的，操作效率较低</li>
+</ol>
+</li>
+<li>Set 无序的，不可以重复<ol>
+<li>HashSet 底层代码用的是哈希表实现，特点在存取速度快</li>
+<li>TreeSet 底层代码用的是二叉树(红黑树) ，特点在会对集合中的元素自动进行排序</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>Map</p>
+<ol>
+<li>HashMap</li>
+<li>TreeMap</li>
+</ol>
+<p>​</p>
+</li>
+</ol>
+<h4 id="集合的遍历方式"><a href="#集合的遍历方式" class="headerlink" title="集合的遍历方式"></a>集合的遍历方式</h4><ol>
+<li>List遍历，list.add数据后，for循环遍历调用list.get来获取数据或者用高级for</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ArrayList&lt;String&gt; arrlist = <span class="keyword">new</span> ArrayList&lt;String&gt;();</div><div class="line">arrlist.add(<span class="string">"This is ArrayList 1"</span>);</div><div class="line">arrlist.add(<span class="string">"This is ArrayList 2"</span>);</div><div class="line">arrlist.add(<span class="string">"This is ArrayList 3"</span>);</div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span> ;i&lt;arrlist.size();i++)&#123;</div><div class="line">  System.out.println(arraylist.get(i));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>iterator迭代器遍历，set.add或者list.add数据后，获取迭代器，迭代器始终为true，使用while，hasNext遍历数据，用X.next获取当前数据</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</div><div class="line">  <span class="keyword">int</span> id;</div><div class="line">  String name;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Persion</span><span class="params">(<span class="keyword">int</span> id, String name)</span></span>&#123;</div><div class="line">    Super();</div><div class="line">    <span class="keyword">this</span>.id = id;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">  &#125;</div><div class="line">  <span class="meta">@Override</span> </div><div class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">"id:"</span> + <span class="keyword">this</span>.id + <span class="string">"name:"</span> + <span class="keyword">this</span>.name;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">xxxx</span></span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">HashSet&lt;Person&gt; hset = <span class="keyword">new</span> HashSet&lt;Person&gt;();</div><div class="line">hset.add(<span class="keyword">new</span> Person(<span class="number">1</span>,<span class="string">"ruby"</span>));</div><div class="line">hset.add(<span class="keyword">new</span> Person(<span class="number">2</span>,<span class="string">"node"</span>));</div><div class="line">hset.add(<span class="keyword">new</span> Person(<span class="number">2</span>,<span class="string">"node"</span>));</div><div class="line">    <span class="comment">//hashset，Set集合由于是无序的并且是不可重复的，此处重复了2,"node"后输出依旧会输出，因为此处添加的是一个person对象，而每一个新对象都有不同哈希值，hashset判断重复原理是根据哈希值来判断，如哈希表中该哈希值不存在则存入数据，否则则不允许存入。所以此处应当覆写hashcode方法，返回唯一的id来辨认对象是否一致。并且hashset在确定哈希表中存在相同哈希值的情况是使用equals方法在该位置上的元素再比较一次，所以还需要覆写equals方法，把对象id传入并且对比该对象的id是否一致。如果一致则是有相同元素。不再写入重复元素，否则写入元素</span></div><div class="line">System.out.println(hset);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">HashSet&lt;String&gt; hset = <span class="keyword">new</span> HashSet&lt;String&gt;();</div><div class="line">hset.add(<span class="string">"This is HashSet 1"</span>);</div><div class="line">hset.add(<span class="string">"This is HashSet 2"</span>);</div><div class="line">hset.add(<span class="string">"This is HashSet 3"</span>);</div><div class="line">Iterator&lt;String&gt; it = hset.iterator();</div><div class="line"><span class="keyword">while</span>(it.hasNext)&#123;</div><div class="line">  System.out.println(it.next());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>foreach循环遍历（高级for），左临时变量获取右集合变量内数据，然后输出临时变量。“底层也是迭代器”,迭代器迭代过程不允许集合对象修改元素的个数，只能用迭代器的方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ArrayList&lt;String&gt; arrlist = <span class="keyword">new</span> ArrayList&lt;String&gt;();</div><div class="line">arrlist.add(<span class="string">"This is ArrayList 1"</span>);</div><div class="line">arrlist.add(<span class="string">"This is ArrayList 2"</span>);</div><div class="line">arrlist.add(<span class="string">"This is ArrayList 3"</span>);</div><div class="line"><span class="keyword">for</span>(String templist : arrlist)&#123;</div><div class="line">  System.out.println(templist);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+<li><p>map键值遍历，map.put数据后，使用Entry遍历，map对象获取到entrySet，返回Set集合，然后使用foreach循环输出键值对</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">HashMap&lt;String,String&gt; map = <span class="keyword">new</span> HashMap&lt;String,String&gt;();</div><div class="line">map.put(<span class="string">"1"</span>,<span class="string">"Csharp"</span>);</div><div class="line">map.put(<span class="string">"2"</span>,<span class="string">"node"</span>);</div><div class="line">map.put(<span class="string">"3"</span>,<span class="string">"python"</span>);</div><div class="line">Set&lt;Entry&lt;String,String&gt;&gt; entrys = map.entrySet();</div><div class="line"><span class="keyword">for</span>(Entry&lt;String,String&gt; entry : entrys)&#123;</div><div class="line">  System.out.println(<span class="string">"key:"</span>+ entry.getKey() + <span class="string">" value:"</span> + entry.getValue());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ul>
+<h3 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h3><p>规范一个对象的类型，把运行时出现的问题提前到编译时（原因是在创建对象或者数组的时候，如果没有指定泛型 ，那么传入多个不同类型的参数时没办法跟返回参数一致。例如一个集合放入字符串String类型，然后获取该集合中的字符串，此时是没问题的，但是如果在该集合中插入添加了Integer类型的情况，那么获取集合中元素或者操作集合元素的时候将会出错，而使用泛型的情况，在编译时就将会提醒用户该集合中插入了不同类型的元素的错误。）</p>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">xxxxx</span></span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">    ArrayList arrlist = <span class="keyword">new</span> ArrayList();</div><div class="line">    arrlist.add(<span class="string">"java jdk"</span>);</div><div class="line">    arrlist.add(<span class="string">"java jre"</span>);</div><div class="line">    arrlist.add(<span class="string">"java jvm"</span>);</div><div class="line">    arrlist.add(<span class="number">19</span>);<span class="comment">//此时集合无泛型，可添加Object类，所以String和Int类型都可添加，但是在进行读取胡总操作时将会出错</span></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i&lt;arrlist.size() ; i++ )&#123;</div><div class="line">      String str = (String) arrlist.get(i);<span class="comment">//此时在集合中的第四个元素，Int类型19在传引用到str时将会报类型转换出错。</span></div><div class="line">      System.out.println(str.toUpperCase());<span class="comment">//而对集合进行大小写转换操作时，Int类型没有大小写之分，所以也会报错。</span></div><div class="line">    &#125;</div><div class="line">    <span class="comment">//正确应当：</span></div><div class="line">    ArrayList&lt;String&gt; arrlist2 = <span class="keyword">new</span> ArrayList&lt;String&gt;();</div><div class="line">    arrlist.add(<span class="string">"java jdk"</span>);</div><div class="line">    arrlist.add(<span class="string">"java jre"</span>);</div><div class="line">    arrlist.add(<span class="string">"java jvm"</span>);</div><div class="line">    arrlist.add(<span class="number">19</span>);<span class="comment">//此时编译器就会报错，添加了非String类型数据</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="泛型的好处和注意事项"><a href="#泛型的好处和注意事项" class="headerlink" title="泛型的好处和注意事项:"></a>泛型的好处和注意事项:</h4><ol>
+<li>避免无谓的强制转换类型</li>
+<li>泛型没有多态的说法或者概念</li>
+<li>泛型推荐两边都要一致，写单边可以通过是为了兼容老版本系统</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">X&lt;S&gt; x = <span class="keyword">new</span> X&lt;S&gt;(); <span class="keyword">true</span></div><div class="line">X&lt;S&gt; x = <span class="keyword">new</span> X&lt;O&gt;(); <span class="keyword">false</span></div><div class="line">X&lt;O&gt; x = <span class="keyword">new</span> X&lt;S&gt;(); <span class="keyword">false</span></div><div class="line">X x = <span class="keyword">new</span> X&lt;S&gt;(); <span class="keyword">true</span></div><div class="line">X&lt;S&gt; x = <span class="keyword">new</span> X(); <span class="keyword">true</span></div></pre></td></tr></table></figure>
+<h5 id="自定义泛型-（自定义泛型的声明可以是合法的名称即可）"><a href="#自定义泛型-（自定义泛型的声明可以是合法的名称即可）" class="headerlink" title="自定义泛型 （自定义泛型的声明可以是合法的名称即可）"></a>自定义泛型 （自定义泛型的声明可以是合法的名称即可）</h5><p>自定义泛型就是相当于调用方法传的值 T 是什么类型，而返回就是什么类型。<t> T占位符 等同于一个变量 <t>相当于声明一个T变量<br>修饰符 &lt;声明自定义泛型&gt; 返回值类型泛型 函数名(形参)</t></t></p>
+<h6 id="泛型类的声明"><a href="#泛型类的声明" class="headerlink" title="泛型类的声明"></a>泛型类的声明</h6><p>可以在类名上声明出一个自定义泛型，要注意的是：</p>
+<ol>
+<li>在类上自定义泛型的时候，具体的数据类型是在创建对象的时候指定。</li>
+<li>在类上自定义的泛型，如果创建该类的对象没有指定泛型的具体类型，那么默认为泛型类中声明的Object类型。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">xxxxx</span>&lt;<span class="title">T</span>&gt;</span>&#123;</div><div class="line">  Object[] arr = <span class="keyword">new</span> Object[<span class="number">10</span>];</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">xxxxx</span><span class="params">()</span></span>&#123;&#125;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">xxx</span><span class="params">(T t)</span></span>&#123;&#125;</div><div class="line">  xxxxx&lt;String&gt; xx = <span class="keyword">new</span> xxxxx&lt;String&gt;(); <span class="comment">//此时xx.xxx(T t)中只能添加String</span></div><div class="line">  xxxxx xx = <span class="keyword">new</span> xxxxx(); <span class="comment">//不给泛型类加泛型的时候，xx.xxx(T t)中是Object类型</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h6 id="泛型接口的声明"><a href="#泛型接口的声明" class="headerlink" title="泛型接口的声明"></a>泛型接口的声明</h6><p>可以在接口上声明出一个自定义泛型，要注意的是：</p>
+<ol>
+<li>在接口上自定义泛型的是hi，具体的数据类型是在实现xxxxx接口的时候指定</li>
+<li>在接口上自定义的泛型，如果实现该接口时没有指定泛型的具体类型，那么默认为Object类型。</li>
+<li>如果希望在使用创建接口实现类对象的时候再指定接口自定义泛型具体类型，则需要在实现接口出声明出<t>然后去创建实现类的时候再指定具体类型</t></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">xxxxx</span>&lt;<span class="title">T</span>&gt;</span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">xxx</span><span class="params">(T t)</span></span>;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">xxxvvv</span><span class="params">(T t)</span></span>;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">vvvvv</span> <span class="keyword">implements</span> <span class="title">xxxxx</span>&lt;<span class="title">String</span>&gt;</span>&#123; <span class="comment">//指定为String，实现的方法则为String</span></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">xxx</span><span class="params">(String t)</span></span>;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">xxxvvv</span><span class="params">(String t)</span></span>;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">vvvvv</span> <span class="keyword">implements</span> <span class="title">xxxxx</span></span>&#123;<span class="comment">//不去指定泛型，实现的方法则为Object</span></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">xxx</span><span class="params">(Object t)</span></span>;</div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">xxxvvv</span><span class="params">(Object t)</span></span>;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">vvvvv</span> <span class="keyword">implements</span> <span class="title">xxxxx</span></span>&#123;<span class="comment">//如果想在创建和使用对象的时候指定类型，则需要在实现接口的时候指定类型为&lt;T&gt;,然后再在类方法中创建对象的时候指定具体的类型</span></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">xxx</span><span class="params">(Object t)</span></span>;</div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">xxxvvv</span><span class="params">(Object t)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="常用IO操作和Thread操作"><a href="#常用IO操作和Thread操作" class="headerlink" title="常用IO操作和Thread操作"></a>常用IO操作和Thread操作</h2><h3 id="IO操作的常用类"><a href="#IO操作的常用类" class="headerlink" title="IO操作的常用类"></a>IO操作的常用类</h3><ol>
+<li>字节流<ol>
+<li>InputStream //IO操作中字节流的基类(父类)，也是个抽象类<ol>
+<li>FileInputStream //向文件写入字节数据的写入字节流</li>
+<li>BufferedInputStream //缓冲写入字节数据的缓冲写入字节流，为写入文件字节提高效率的类</li>
+</ol>
+</li>
+<li>OutputStream<ol>
+<li>FileOutputStream //向文件输出字节数据的输出字节流</li>
+<li>BufferedOutputStream //缓冲输出字节数据的缓冲输出字节流，为输出文件字节提高效率的类</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>字符流<ol>
+<li>Reader //IO操作中字符流的基类(父类)，也是个抽象类<ol>
+<li>FileReader //向文件写入字符数据的写入字符流</li>
+<li>BufferedReader //缓冲写入字符数据的缓冲写入字符流，为写入文件字符提高效率的类</li>
+</ol>
+</li>
+<li>Writer<ol>
+<li>FileWriter //向文件输出字符数据的输出字符流</li>
+<li>BufferedWriter //缓冲输出字符数据的缓冲输出字符流，为输出文件字符提高效率的类</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>转换流（可以把对应的字节流转换为字符流并且还能指定字符集）<ol>
+<li>InputStreamReader //输入字节流的转换流</li>
+<li>OutputStreamWriter //输出字节流的转换流</li>
+</ol>
+</li>
+</ol>
+<h5 id="转换流的实际用例"><a href="#转换流的实际用例" class="headerlink" title="转换流的实际用例"></a>转换流的实际用例</h5><ol>
+<li><p>字节输入流转换为字符输入流</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">xxxxx</span></span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">    InputStream in = System.in;</div><div class="line">	InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(in); <span class="comment">//把控制台输入的字节流转换为字符流</span></div><div class="line">	BufferedReader br = <span class="keyword">new</span> BufferedReader(isr);</div><div class="line">    <span class="comment">//此时BufferedReader缓冲字符流需要传入的是一个Reader字符流对象，InputStream无法传入，所以需要进行转换</span></div><div class="line">	String s = br.readLine();</div><div class="line">	System.out.println(s);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>字节输出流转换为字符输出流</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">xxxxx</span></span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">    Socket socket = <span class="keyword">new</span> Socket(InetAddress.getLocalHost(),<span class="number">8080</span>);/</div><div class="line">    OutputStream out = socket.getOutputStream();<span class="comment">///获取到socket的输出流对象</span></div><div class="line">    OutputStreamWriter outsw = <span class="keyword">new</span> OutputStreamWriter(out);</div><div class="line">    <span class="comment">//把获取到的输出字节流转换为输出字符流，同时在OutputStreamWriter的构造方法中还有一个形参可以指定字符集，如：new OutputStreamWriter(out，"utf-8")</span></div><div class="line">    outsw.write(<span class="string">"Java IOStream"</span>);</div><div class="line">  &#125;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fileIO</span><span class="params">()</span></span>&#123;</div><div class="line">    InputStream in = System.in;</div><div class="line">	InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(in); </div><div class="line">	BufferedReader br = <span class="keyword">new</span> BufferedReader(isr);</div><div class="line">	String s = br.readLine();</div><div class="line">	System.out.println(s);</div><div class="line">	FileOutputStream file = <span class="keyword">new</span> FileOutputStream(</div><div class="line">      					<span class="string">"C:"</span>+File.separator+<span class="string">"Users"</span>+File.separator+</div><div class="line">      					<span class="string">"bitam"</span>+File.separator+<span class="string">"Desktop"</span>+File.separator+<span class="string">"x.txt"</span>);</div><div class="line">    <span class="comment">//创建文件和程序的数据连接</span></div><div class="line">	OutputStreamWriter outsw = <span class="keyword">new</span> OutputStreamWriter(file,<span class="string">"utf-8"</span>);</div><div class="line">    <span class="comment">//创建一个输出字节转换字符流并指定字符集来写入数据</span></div><div class="line">	outsw.write(s);<span class="comment">//写入操作</span></div><div class="line">    outsw.close();<span class="comment">//关闭IO资源</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><h4 id="多线程的创建方式"><a href="#多线程的创建方式" class="headerlink" title="多线程的创建方式"></a>多线程的创建方式</h4><ol>
+<li><p>extends Thread （继承Thread多线程类）</p>
+<ol>
+<li>创建一个类去继承Thread类</li>
+<li>覆写Thread的run方法，把自定义线程的任务写在run方法中</li>
+<li>创建一个Thread的子类对象（该继承了Thread并覆写了run方法的那个类），并且使用start方法来启动该线程</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">xxxxx</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</div><div class="line">  	<span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span> ; i&lt;<span class="number">100</span> ; i++)&#123;</div><div class="line">      System.out.println(Thread.currentThread().getName()+<span class="string">":"</span>+i);<span class="comment">//获取当前方法线程名并输出i</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">    xxxxx x = <span class="keyword">new</span> xxxxx();</div><div class="line">    x.start();</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span> ; i&lt;<span class="number">100</span> ; i++)&#123;</div><div class="line">      System.out.println(Thread.currentThread().getName()+<span class="string">":"</span>+i);<span class="comment">//获取当前方法线程名并输出i</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>implements Runnable (实现Runnable多线程接口)</p>
+<ol>
+<li>创建一个类实现Runnable接口</li>
+<li>覆写Runnable的run方法，把自定义线程的任务写在run方法中</li>
+<li>创建一个Runnable实现类对象(也就是实现了Runnable接口并覆写了run方法的那个类)</li>
+<li>创建一个Thread对象，然后把Runnable实现类的对象作为参数去传递给Thread对象</li>
+<li>调用Thread对象的strat方法开启线程</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">xxxxx</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i&lt;<span class="number">100</span> ; i++)&#123;</div><div class="line">			System.out.println(Thread.currentThread().getName()+<span class="string">":"</span>+i);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ttttt</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">		xxxxx x = <span class="keyword">new</span> xxxxx();</div><div class="line">		Thread t = <span class="keyword">new</span> Thread(x);</div><div class="line">		t.start();</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i&lt;<span class="number">100</span> ; i++)&#123;</div><div class="line">			System.out.println(Thread.currentThread().getName()+<span class="string">":"</span>+i);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="线程安全问题的解决方案"><a href="#线程安全问题的解决方案" class="headerlink" title="线程安全问题的解决方案"></a>线程安全问题的解决方案</h4><h5 id="线程安全问题出现情况原因："><a href="#线程安全问题出现情况原因：" class="headerlink" title="线程安全问题出现情况原因："></a>线程安全问题出现情况原因：</h5><ol>
+<li>必须有存在两个或者以上的线程共享着一个资源的情况才会出现</li>
+<li>操作共享资源的代码必须有两句或者以上</li>
+</ol>
+<h5 id="线程安全的解决方式"><a href="#线程安全的解决方式" class="headerlink" title="线程安全的解决方式"></a>线程安全的解决方式</h5><ol>
+<li><p>同步代码块</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">synchronized</span>(锁)&#123;</div><div class="line">	需要被同步的代码</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>同步函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">修饰符 <span class="keyword">synchronized</span> 返回值类型 函数名(形参列表...)&#123;</div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h5 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h5><ol>
+<li>同步代码块的锁可以使任意的对象，同步函数的锁是固定的</li>
+<li>非静态函数的锁对象是this对象，静态函数的锁对象是class对象</li>
+<li>锁对象必须是多线程共享的对象，否则锁不住</li>
+<li>在同步代码块或者是同步函数中调用sleep方法是不会释放锁对象的，如果是调用了wait方法是会释放锁对象的</li>
+</ol>
+<h3 id="关于-和equals的区别"><a href="#关于-和equals的区别" class="headerlink" title="关于==和equals的区别"></a>关于==和equals的区别</h3><h4 id="从简单来说"><a href="#从简单来说" class="headerlink" title="从简单来说"></a>从简单来说</h4><h5 id="是字面意思，等于。equals则是比较，是否相同。而等于跟相同是两个概念，可以从以下例子来理解："><a href="#是字面意思，等于。equals则是比较，是否相同。而等于跟相同是两个概念，可以从以下例子来理解：" class="headerlink" title="==是字面意思，等于。equals则是比较，是否相同。而等于跟相同是两个概念，可以从以下例子来理解："></a>==是字面意思，等于。equals则是比较，是否相同。而等于跟相同是两个概念，可以从以下例子来理解：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">String i = <span class="string">"Java"</span>;</div><div class="line">String ii = <span class="string">"Java"</span>;</div><div class="line">String iii = <span class="string">"Java1"</span>;</div><div class="line">String iiii = <span class="keyword">new</span> String(<span class="string">"Java"</span>);</div><div class="line">System.out.println(i.equals(ii));<span class="comment">//由于String有覆写了equals方法，所以内容相同时，比较返回true</span></div><div class="line">System.out.println(i.equals(iii));<span class="comment">//由于内容不相同所以返回false</span></div><div class="line">System.out.println(i.equals(iiii));<span class="comment">//由于内容相同，但是String覆写了equals方法，所以内容相同返回true</span></div><div class="line">System.out.println(i==ii);<span class="comment">//由于JAVA中对象内容一致的时候，非创建新对象，则堆中内容指向相同的栈引用</span></div><div class="line">System.out.println(i==iiii);<span class="comment">//;由于==是比较的地址值，这里new了一个心对象，所以地址值不同，返回false</span></div><div class="line">System.out.println(i.toString()+<span class="string">"|"</span>+i.getBytes()+<span class="string">"|"</span>+i.hashCode());</div><div class="line">System.out.println(ii.toString()+<span class="string">"|"</span>+ii.getBytes()+<span class="string">"|"</span>+ii.hashCode());</div><div class="line">System.out.println(iii.toString()+<span class="string">"|"</span>+iii.getBytes()+<span class="string">"|"</span>+iii.hashCode());</div><div class="line">System.out.println(iiii.toString()+<span class="string">"|"</span>+iiii.getBytes()+<span class="string">"|"</span>+iiii.hashCode());</div></pre></td></tr></table></figure>
+<h4 id="从Java角度来说"><a href="#从Java角度来说" class="headerlink" title="从Java角度来说"></a>从Java角度来说</h4><p>==是判断两个变量或者对象实例是不是指向相同的内存栈(地址值)，equals则判断两个变量或者对象实例的hashcode是不是相同（相同引用），使用==的情况会对内存地址值进行比较，equals则对该对象的hashcode进行比较。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">String s = <span class="string">"Java"</span>;<span class="comment">// hashcode:2301506 内存地址值:[B@5a3e03b3</span></div><div class="line">String srt = <span class="keyword">new</span> String(<span class="string">"Java"</span>); <span class="comment">//hashcode:2301506 内存地址值:[B@1d650b0e</span></div></pre></td></tr></table></figure>
+<h4 id="实战中"><a href="#实战中" class="headerlink" title="实战中"></a>实战中</h4><p>如果只比较两个基本数据类型值，那么只需要使用==，而不能使用equals，因为equals是个函数（方法），而基本类型如int，float，double等不是对象，那么就没有函数，所以是无法equals的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> i = <span class="number">1</span>;</div><div class="line"><span class="keyword">int</span> y = <span class="number">1</span>;</div><div class="line">System.out.println(i.equals(y));</div><div class="line">将会提示错误信息：</div><div class="line"><span class="function">Cannot invoke <span class="title">equals</span><span class="params">(<span class="keyword">int</span>)</span> on the primitive type <span class="keyword">int</span>。</span></div><div class="line"><span class="function">除非把声明类型换为Integer对象</span></div><div class="line"><span class="function">Integer i </span>= <span class="number">1</span>;</div><div class="line">Integer y = <span class="number">1</span>;</div><div class="line">System.out.println(i.equals(y));</div><div class="line">则会通过，并输出<span class="keyword">true</span></div></pre></td></tr></table></figure>
+<p>所以如果比较的是值，建议使用==，而不用equals，具体原因如下。</p>
+<p>equals底层源码是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span> </span>&#123;</div><div class="line">	<span class="keyword">if</span> (obj <span class="keyword">instanceof</span> Integer) &#123;</div><div class="line">		<span class="keyword">return</span> value == ((Integer)obj).intValue();</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>传入一个对象，如果对比两个实例是否是同一个实例（instanceof），如果是则继续判断该实例对象的hashcode跟该被比较对象的hashcode用==对比，相同则返回true，否则返回false。</p>
+<p>而如果传入对象后对比两个实例根本不是同一个实例，那么也就不用在进一步用==对比地址值，直接返回false。</p>
+<p>也就是equals其实也是直接调用了==操作，不过是当实例相同时调用它来对比hashcode。</p>
+<p>如果想对比一个对象的地址值是否相同，应该按照自己的需求去覆写equals方法。而且如果在不覆写equals方法的情况，使用==就是比较地址值，使用equals就是比较是否同一引用和hashcode是否相同。</p>
+<h3 id="Junit-常用注释："><a href="#Junit-常用注释：" class="headerlink" title="Junit 常用注释："></a>Junit 常用注释：</h3><p>测试体@Test  </p>
+<p>//测试体不能是static修饰和不能有形参</p>
+<p>非静态测试前环境@Before    </p>
+<p>非静态测试后清理@After  </p>
+<p> //不带Class在每个测试方法测试的时候会调用一次    </p>
+<p>静态测试前环境 @BeforeClass</p>
+<p>静态测试后清理@AfterClass</p>
+<p> //带Class在所有测试方法测试之前和测试之后的时候只调用一次</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/12/23/关于java的一些基础知识要点/">关于java的一些基础知识要点</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Bitamin Kim 的个人博客">Bitamin Kim</a></p>
+        <p><span>发布时间:</span>2016年12月23日 - 15时04分</p>
+        <p><span>最后更新:</span>2016年12月25日 - 18时34分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/12/23/关于java的一些基础知识要点/" title="关于java的一些基础知识要点">http://bitamin.pw/2016/12/23/关于java的一些基础知识要点/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://bitamin.pw/2016/12/23/关于java的一些基础知识要点/　　作者: Bitamin Kim" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2016/12/27/关于Html,Css,Js的一些基础知识要点/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          关于Html,Css,JavaScript的一些基础知识要点
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/07/25/留言板学习记录/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">留言板的学习记录</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#关于集合和泛型"><span class="toc-number">1.</span> <span class="toc-text">关于集合和泛型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#集合常用类"><span class="toc-number">1.1.</span> <span class="toc-text">集合常用类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#集合的遍历方式"><span class="toc-number">1.1.1.</span> <span class="toc-text">集合的遍历方式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#泛型"><span class="toc-number">1.2.</span> <span class="toc-text">泛型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#例子"><span class="toc-number">1.2.1.</span> <span class="toc-text">例子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#泛型的好处和注意事项"><span class="toc-number">1.2.2.</span> <span class="toc-text">泛型的好处和注意事项:</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#自定义泛型-（自定义泛型的声明可以是合法的名称即可）"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">自定义泛型 （自定义泛型的声明可以是合法的名称即可）</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#泛型类的声明"><span class="toc-number">1.2.2.1.1.</span> <span class="toc-text">泛型类的声明</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#泛型接口的声明"><span class="toc-number">1.2.2.1.2.</span> <span class="toc-text">泛型接口的声明</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用IO操作和Thread操作"><span class="toc-number">2.</span> <span class="toc-text">常用IO操作和Thread操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IO操作的常用类"><span class="toc-number">2.1.</span> <span class="toc-text">IO操作的常用类</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#转换流的实际用例"><span class="toc-number">2.1.0.1.</span> <span class="toc-text">转换流的实际用例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多线程"><span class="toc-number">2.2.</span> <span class="toc-text">多线程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#多线程的创建方式"><span class="toc-number">2.2.1.</span> <span class="toc-text">多线程的创建方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线程安全问题的解决方案"><span class="toc-number">2.2.2.</span> <span class="toc-text">线程安全问题的解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#线程安全问题出现情况原因："><span class="toc-number">2.2.2.1.</span> <span class="toc-text">线程安全问题出现情况原因：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#线程安全的解决方式"><span class="toc-number">2.2.2.2.</span> <span class="toc-text">线程安全的解决方式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#注意事项："><span class="toc-number">2.2.2.3.</span> <span class="toc-text">注意事项：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于-和equals的区别"><span class="toc-number">2.3.</span> <span class="toc-text">关于==和equals的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#从简单来说"><span class="toc-number">2.3.1.</span> <span class="toc-text">从简单来说</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#是字面意思，等于。equals则是比较，是否相同。而等于跟相同是两个概念，可以从以下例子来理解："><span class="toc-number">2.3.1.1.</span> <span class="toc-text">==是字面意思，等于。equals则是比较，是否相同。而等于跟相同是两个概念，可以从以下例子来理解：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#从Java角度来说"><span class="toc-number">2.3.2.</span> <span class="toc-text">从Java角度来说</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#实战中"><span class="toc-number">2.3.3.</span> <span class="toc-text">实战中</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Junit-常用注释："><span class="toc-number">2.4.</span> <span class="toc-text">Junit 常用注释：</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2016/12/23/关于java的一些基础知识要点/" data-title="关于java的一些基础知识要点" data-url="http://bitamin.pw/2016/12/23/关于java的一些基础知识要点/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"BitaminKim"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '/js/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/12/27/关于Html,Css,Js的一些基础知识要点/" title="上一篇: 关于Html,Css,JavaScript的一些基础知识要点">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2016/07/25/留言板学习记录/" title="下一篇: 留言板的学习记录">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/01/07/关于DOM编程/">关于DOM编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/27/关于Html,Css,Js的一些基础知识要点/">关于Html,Css,JavaScript的一些基础知识要点</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/23/关于java的一些基础知识要点/">关于java的一些基础知识要点</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/25/留言板学习记录/">留言板的学习记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/25/PHP的学习记录/">PHP的学习记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/14/如何设置github和coding的pages域名绑定/">github和coding的pages共存</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/27/MySQL的命令总结-二/">MySQL的命令总结（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/25/MySQL的命令总结-一/">MySQL的命令总结(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/25/新的开始/">新的开始</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/hello-world/">Hello World</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Bitamin Kim
+            </div>
+            <div class="footer-right">
+                <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=0 height=0 src="http://music.163.com/outchain/player?type=2&id=413961906&auto=1&height=66"></iframe> -->
+		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/Bitaminkim/hexo-theme-Rem" target="_blank">Rem</a> by BitaminKim
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 6;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>

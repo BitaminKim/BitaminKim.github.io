@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>关于DOM编程 | Bitamin Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="关于JavaScript-DOM编程的一些基础知识要点">
+<meta name="keywords" content="DOM,JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于DOM编程">
+<meta property="og:url" content="http://bitamin.pw/2017/01/07/关于DOM编程/index.html">
+<meta property="og:site_name" content="Bitamin Blog">
+<meta property="og:description" content="关于JavaScript-DOM编程的一些基础知识要点">
+<meta property="og:updated_time" content="2017-01-24T18:01:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于DOM编程">
+<meta name="twitter:description" content="关于JavaScript-DOM编程的一些基础知识要点">
+  
+    <link rel="alternative" href="/rss.xml" title="Bitamin Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">Bitamin Kim</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">黄东鹏</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">首页</a></li>
+                        
+                            <li><a href="/Works">作品</a></li>
+                        
+                            <li><a href="/About">简历</a></li>
+                        
+                            <li><a href="/Life">生活</a></li>
+                        
+                            <li><a href="/Like">兴趣</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=w-X3_vvw_vb08oOysu2grK4" title="mail">mail</a>
+                            
+                                <a class="fl coding" target="_blank" href="https://coding.net/u/BitaminKim" title="coding">coding</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/BitaminKim" title="github">github</a>
+                            
+                                <a class="fl stackoverflow" target="_blank" href="http://stackoverflow.com/users/6459971/%E9%BB%84%E4%B8%9C%E9%B9%8F" title="stackoverflow">stackoverflow</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="https://www.zhihu.com/people/huangdongpeng" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="http://weibo.com/lookhackerss" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="https://plus.google.com/u/0/101979608232235486497" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="https://twitter.com/huangdongpeng" title="twitter">twitter</a>
+                            
+                                <a class="fl facebook" target="_blank" href="https://www.facebook.com/huangdongpeng" title="facebook">facebook</a>
+                            
+                                <a class="fl Instagram" target="_blank" href="https://www.instagram.com/bitamin.kim" title="Instagram">Instagram</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="https://www.linkedin.com/in/%e4%b8%9c%e9%b9%8f-%e9%bb%84-a46482109" title="linkedin">linkedin</a>
+                            
+                                <a class="fl soundcloud" target="_blank" href="https://soundcloud.com/dp-kim" title="soundcloud">soundcloud</a>
+                            
+                                <a class="fl QQ" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=649839571&site=qq&menu=yes" title="QQ">QQ</a>
+                            
+                                <a class="fl wechat" target="_blank" href="/img/Wechatjpg.jpg" title="wechat">wechat</a>
+                            
+                                <a class="fl rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Css/" style="font-size: 10px;">Css</a> <a href="/tags/DOM/" style="font-size: 10px;">DOM</a> <a href="/tags/Domain/" style="font-size: 10px;">Domain</a> <a href="/tags/Html/" style="font-size: 10px;">Html</a> <a href="/tags/JAVA/" style="font-size: 10px;">JAVA</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/MySQL-PHP/" style="font-size: 10px;">MySQL PHP</a> <a href="/tags/MySQL-PHP-JS-RequireJs/" style="font-size: 10px;">MySQL PHP JS RequireJs</a> <a href="/tags/coding/" style="font-size: 10px;">coding</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/开始/" style="font-size: 10px;">开始</a> <a href="/tags/泛型/" style="font-size: 10px;">泛型</a> <a href="/tags/集合/" style="font-size: 10px;">集合</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="/archives">所有文章</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://MOxFIVE.github.io/">MOxFIVE</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.vsay.cn/">DoubleV</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.ccwebsite.com/">兮兮</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.dandyweng.com/">翁天信</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.plqblog.com/views/index.php">潘利强</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.hankin.cn/">hankin</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.waydrow.com/">waydrow</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">动漫宅、技术宅、眼镜男、喜欢风景、喜欢游戏、喜欢音乐(Electronic Music)、喜欢旅游、向往外国极限运动。</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Bitamin Kim</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Bitamin Kim</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">黄东鹏</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">首页</a></li>
+                
+                    <li><a href="/Works">作品</a></li>
+                
+                    <li><a href="/About">简历</a></li>
+                
+                    <li><a href="/Life">生活</a></li>
+                
+                    <li><a href="/Like">兴趣</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=w-X3_vvw_vb08oOysu2grK4" title="mail">mail</a>
+                    
+                        <a class="coding" target="_blank" href="https://coding.net/u/BitaminKim" title="coding">coding</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/BitaminKim" title="github">github</a>
+                    
+                        <a class="stackoverflow" target="_blank" href="http://stackoverflow.com/users/6459971/%E9%BB%84%E4%B8%9C%E9%B9%8F" title="stackoverflow">stackoverflow</a>
+                    
+                        <a class="zhihu" target="_blank" href="https://www.zhihu.com/people/huangdongpeng" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="http://weibo.com/lookhackerss" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="https://plus.google.com/u/0/101979608232235486497" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="https://twitter.com/huangdongpeng" title="twitter">twitter</a>
+                    
+                        <a class="facebook" target="_blank" href="https://www.facebook.com/huangdongpeng" title="facebook">facebook</a>
+                    
+                        <a class="Instagram" target="_blank" href="https://www.instagram.com/bitamin.kim" title="Instagram">Instagram</a>
+                    
+                        <a class="linkedin" target="_blank" href="https://www.linkedin.com/in/%e4%b8%9c%e9%b9%8f-%e9%bb%84-a46482109" title="linkedin">linkedin</a>
+                    
+                        <a class="soundcloud" target="_blank" href="https://soundcloud.com/dp-kim" title="soundcloud">soundcloud</a>
+                    
+                        <a class="QQ" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=649839571&site=qq&menu=yes" title="QQ">QQ</a>
+                    
+                        <a class="wechat" target="_blank" href="/img/Wechatjpg.jpg" title="wechat">wechat</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-关于DOM编程" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/01/07/关于DOM编程/" class="article-date">
+      <time datetime="2017-01-07T09:55:42.000Z" itemprop="datePublished">2017-01-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      关于DOM编程
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/开发/">开发</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DOM/">DOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>关于JavaScript-DOM编程的一些基础知识要点</p>
+<a id="more"></a>
+<h2 id="DOM-Document-Object-Model-文档对象模型"><a href="#DOM-Document-Object-Model-文档对象模型" class="headerlink" title="DOM(Document Object Model) 文档对象模型"></a>DOM(Document Object Model) 文档对象模型</h2><h4 id="DOM编程通过标签属性获取节点的方法"><a href="#DOM编程通过标签属性获取节点的方法" class="headerlink" title="DOM编程通过标签属性获取节点的方法"></a>DOM编程通过标签属性获取节点的方法</h4><ol>
+<li>document.getElementById(“HTML标签元素的ID”);</li>
+<li>document.getElementsByTagName(“HTML标签元素名”); (返回值是数组)</li>
+<li>document.getElementsByName(“HTML标签元素的name”); (返回值是数组)</li>
+</ol>
+<h4 id="DOM编程通过关系获取标签节点的方法"><a href="#DOM编程通过关系获取标签节点的方法" class="headerlink" title="DOM编程通过关系获取标签节点的方法"></a>DOM编程通过关系获取标签节点的方法</h4><ol>
+<li><p>nodeType 获取当前节点的类型</p>
+<ol>
+<li>文本节点类型是：3</li>
+<li>注释节点类型是：8</li>
+<li>标签节点类型是：1</li>
+</ol>
+</li>
+<li><p>parentNode 获取当前元素的父节点</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> bodyNode = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"body"</span>)[<span class="number">0</span>];</div><div class="line"><span class="keyword">var</span> parentNode = bodyNode.parentNode;(获取得该元素的父节点对象)</div><div class="line"><span class="keyword">var</span> parentNodeName = parentNode.nodeName;(获取到该父节点名称)</div></pre></td></tr></table></figure>
+</li>
+<li><p>childNodes 获取当前元素的所有下一级子元素</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> bodyNode = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"body"</span>)[<span class="number">0</span>];</div><div class="line"><span class="keyword">var</span> childNodes = bodyNode.childNodes;(获取得该元素的下一级子元素对象的数组)</div><div class="line"><span class="keyword">var</span> childNodesName = parentNode[<span class="number">0</span>].nodeName;(获取到该子节点<span class="number">0</span>指针的名称) </div><div class="line"><span class="comment">//如果有Script标签并且不在body标签体内的情况，浏览器会自动修正把script标签放进body中。且句尾后具有空文本，也算一个节点。注释也算一个节点。如果需要纯标签节点可以使用nodeType来判断类型进行for循环筛选</span></div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span> ; i &lt; childNodes.length ; i++)&#123;</div><div class="line">  <span class="keyword">if</span>(childNodes[i].nodeType == <span class="number">1</span>)&#123;</div><div class="line">    alert(childNodes[i].nodeName);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>firstChild 获取当前节点的第一个子节点</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> bodyNode = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"body"</span>)[<span class="number">0</span>];</div><div class="line"><span class="keyword">var</span> firstChild = bodyNode.firstChild;(获取当前节点的第一个子节点对象)</div><div class="line"><span class="keyword">var</span> firstChildName = firstChild.nodeName;(获取到第一个子节点名称)</div></pre></td></tr></table></figure>
+</li>
+<li><p>lastChild 获取当前节点的最后一个子节点</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> bodyNode = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"body"</span>)[<span class="number">0</span>];</div><div class="line"><span class="keyword">var</span> lastChild  = bodyNode.lastChild;(获取当前节点的最后一个子节点对象)</div><div class="line"><span class="keyword">var</span> lastChildName = lastChild.nodeName;(获取到最后一个子节点名称)</div></pre></td></tr></table></figure>
+<hr>
+</li>
+<li><p>previousSibling 获取当前节点的上一个节点（兄节点）</p>
+</li>
+<li><p>nextSibling 获取当前节点的下一个节点（弟节点）</p>
+</li>
+</ol>
+<h4 id="DOM编程-创建节点，插入节点"><a href="#DOM编程-创建节点，插入节点" class="headerlink" title="DOM编程 创建节点，插入节点"></a>DOM编程 创建节点，插入节点</h4><ol>
+<li><p>document.createElement(“标签名”); 创建标签对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> tableNode = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"table"</span>)[<span class="number">0</span>];</div><div class="line"><span class="keyword">var</span> trNode = <span class="built_in">document</span>.createElement(<span class="string">"tr"</span>);</div><div class="line"><span class="keyword">var</span> tdNode1 = <span class="built_in">document</span>.createElement(<span class="string">"td"</span>);</div><div class="line"><span class="keyword">var</span> tdNode2 = <span class="built_in">document</span>.createElement(<span class="string">"td"</span>);</div></pre></td></tr></table></figure>
+</li>
+<li><p>Object.setAttribute(“属性名”,”属性值”); 设置标签属性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">trNode.setAttribute(<span class="string">"id"</span>,<span class="string">"trNode"</span>);</div></pre></td></tr></table></figure>
+</li>
+<li><p>Object.innerHTML=””;</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">tdNode1.innerHTML = <span class="string">"&lt;input type='file'/&gt;"</span>;</div><div class="line">tdNode2.innerHTML = "&lt;a href="#"&gt;delete&lt;/a&gt;;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Object.appendChild(e); 添加元素对象到Object中子元素最后的位置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">trNode.appendChild(tdNode1);</div><div class="line">trNode.appendChild(tdNode2);</div></pre></td></tr></table></figure>
+</li>
+<li><p>Object.insertBefore(newE,e); 添加元素对象到Object中指定子元素对象前一个位置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tableNode.insertBefore(trNode,e);</div></pre></td></tr></table></figure>
+</li>
+<li><p>Object.removeChild(e); 删除指定的子节点</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tableNode.removeChild(e);</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加创建的标签到文档内</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">tableNode.appendChild(trNode);</div><div class="line"><span class="keyword">var</span> bodyNode = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"body"</span>);</div><div class="line">bodyNode.appendChild(tableNode);</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>####例子</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">table</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">tr</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">name</span>=<span class="string">"file"</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">tr</span> <span class="attr">id</span>=<span class="string">"lastRow"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">name</span>=<span class="string">"buttoon"</span> <span class="attr">onclick</span>=<span class="string">"addFile()"</span> <span class="attr">value</span>=<span class="string">"添加"</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">tr</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">table</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="javascript">		<span class="function"><span class="keyword">function</span> <span class="title">addFile</span>(<span class="params"></span>)</span>&#123;</span></div><div class="line"><span class="javascript">			<span class="comment">//var tableNode = document.getElementsByTagName("table")[0];</span></span></div><div class="line"><span class="javascript">			<span class="keyword">var</span> tbodyNode = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"tbody"</span>)[<span class="number">0</span>];</span></div><div class="line"><span class="javascript">			<span class="keyword">var</span> trNode = <span class="built_in">document</span>.createElement(<span class="string">"tr"</span>);</span></div><div class="line"><span class="javascript">			<span class="keyword">var</span> tdNode1 = <span class="built_in">document</span>.createElement(<span class="string">"td"</span>);</span></div><div class="line"><span class="javascript">			<span class="keyword">var</span> tdNode2 = <span class="built_in">document</span>.createElement(<span class="string">"td"</span>);</span></div><div class="line"><span class="xml">			tdNode1.innerHTML = "<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">'file'</span>/&gt;</span>";</span></div><div class="line"><span class="xml">			tdNode2.innerHTML = "<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">'#'</span> <span class="attr">onclick</span>=<span class="string">'delFile(this)'</span>&gt;</span>delete<span class="tag">&lt;/<span class="name">a</span>&gt;</span>";</span></div><div class="line"><span class="undefined">			trNode.appendChild(tdNode1);</span></div><div class="line"><span class="undefined">			trNode.appendChild(tdNode2);</span></div><div class="line"><span class="javascript">			<span class="comment">//tableNode.insertBefore(trNode,tableNode.firstChild); 在第一个添加</span></span></div><div class="line"><span class="javascript">			tbodyNode.insertBefore(trNode,<span class="built_in">document</span>.getElementById(<span class="string">"lastRow"</span>));</span></div><div class="line"><span class="undefined">		&#125;</span></div><div class="line"><span class="javascript">		<span class="function"><span class="keyword">function</span> <span class="title">delFile</span>(<span class="params">aNode</span>)</span>&#123;</span></div><div class="line"><span class="javascript">			<span class="keyword">var</span> trNode = aNode.parentNode.parentNode;</span></div><div class="line"><span class="javascript">			<span class="keyword">var</span> tbodyNode = <span class="built_in">document</span>.getElementsByTagName(<span class="string">"tbody"</span>)[<span class="number">0</span>];</span></div><div class="line"><span class="undefined">			tbodyNode.removeChild(trNode);</span></div><div class="line"><span class="undefined">		&#125;</span></div><div class="line"><span class="undefined">	</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="利用DOM编程制作联动框"><a href="#利用DOM编程制作联动框" class="headerlink" title="利用DOM编程制作联动框"></a>利用DOM编程制作联动框</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    	省份</div><div class="line">    	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"province"</span> <span class="attr">onchange</span>=<span class="string">"showCity()"</span>&gt;</span></div><div class="line">    		<span class="tag">&lt;<span class="name">option</span>&gt;</span>选择<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">option</span>&gt;</span>广东<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">option</span>&gt;</span>湖南<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">option</span>&gt;</span>广西<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">    	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></div><div class="line">    	城市</div><div class="line">    	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"city"</span>&gt;</span></div><div class="line">    		<span class="tag">&lt;<span class="name">option</span>&gt;</span>选择<span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">    	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></div><div class="line">    	<span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="javascript">    		<span class="function"><span class="keyword">function</span> <span class="title">showCity</span>(<span class="params"></span>)</span>&#123;</span></div><div class="line"><span class="undefined"></span></div><div class="line"><span class="javascript">    			<span class="keyword">var</span> citys = [[],[<span class="string">"广州"</span>,<span class="string">"佛山"</span>,<span class="string">"深圳"</span>,<span class="string">"东莞"</span>],[<span class="string">"长沙"</span>,<span class="string">"衡阳"</span>,<span class="string">"岳阳"</span>,<span class="string">"郴州"</span>],[<span class="string">"南宁"</span>,<span class="string">"桂林"</span>,<span class="string">"贵港"</span>,<span class="string">"柳州"</span>]];</span></div><div class="line"><span class="javascript">    			<span class="keyword">var</span> proviceNode = <span class="built_in">document</span>.getElementById(<span class="string">"province"</span>);</span></div><div class="line"><span class="javascript">    			<span class="keyword">var</span> selectIndex = province.selectedIndex;</span></div><div class="line"><span class="javascript">    			<span class="keyword">var</span> cityDatas = citys[selectIndex];</span></div><div class="line"><span class="undefined"></span></div><div class="line"><span class="javascript">    			cityNode = <span class="built_in">document</span>.getElementById(<span class="string">"city"</span>);</span></div><div class="line"><span class="undefined">    			cityNodes = cityNode.childNodes;</span></div><div class="line"><span class="undefined">    			/*</span></div><div class="line"><span class="javascript">    			<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; cityNodes.length;) &#123;</span></div><div class="line"><span class="undefined">    				cityNode.removeChild(cityNodes[i]);</span></div><div class="line"><span class="undefined">    			&#125;</span></div><div class="line"><span class="undefined">    			</span></div><div class="line"><span class="javascript">    			<span class="keyword">while</span>(cityNodes[<span class="number">0</span>] != <span class="literal">null</span>)&#123;</span></div><div class="line"><span class="undefined">    				cityNode.removeChild(cityNodes[0]);</span></div><div class="line"><span class="undefined">    			&#125;</span></div><div class="line"><span class="undefined">    			*/</span></div><div class="line"><span class="undefined">    			cityNode.options.length = 1;</span></div><div class="line"><span class="javascript">    			<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; cityDatas.length; i++) &#123;</span></div><div class="line"><span class="javascript">    				<span class="keyword">var</span> option = <span class="built_in">document</span>.createElement(<span class="string">"option"</span>);</span></div><div class="line"><span class="undefined">    				option.innerHTML = cityDatas[i];</span></div><div class="line"><span class="undefined">    				cityNode.appendChild(option);</span></div><div class="line"><span class="undefined">    			&#125;</span></div><div class="line"><span class="undefined">    		&#125;</span></div><div class="line"><span class="undefined">    	</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><strong>注意事项：</strong>当选择了一元数组的时候（广东），不会出现问题，正常循环添加option标签到城市的select标签中。而当再次选择一元数组的时候会导致原先option的数据留存，而重复显示了广东相关的城市，所以需要在添加一个方法来清空城市select标签。而在清空过程，每removeChild一个元素，则下标会往前移，从而导致用for循环删除的时候没清空干净。此时可以去掉for循环的i++，使该循环只删除0下标，直到没有内容，或者使用whlie循环判断该数组是否为空，不为空则就执行一次remoceChild。或者还有一个更为简便的方法，使用option标签方法中获取到options数组，再对该数组赋值长度为0，从而清空。</p>
+<h4 id="时间联动框例子"><a href="#时间联动框例子" class="headerlink" title="时间联动框例子"></a>时间联动框例子</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang=<span class="string">"zh"</span>&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;meta charset=<span class="string">"utf-8"</span>&gt;</div><div class="line">    &lt;<span class="regexp">/head&gt;</span></div><div class="line"><span class="regexp">    &lt;body&gt;</span></div><div class="line"><span class="regexp">    	年&lt;select id="year" onchange="showMonth()"&gt;&lt;option&gt;选择&lt;/</span>option&gt;<span class="xml"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span></div><div class="line">    	月&lt;select id=<span class="string">"month"</span> onchange=<span class="string">"showDay()"</span>&gt;<span class="xml"><span class="tag">&lt;<span class="name">option</span>&gt;</span>选择<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span></div><div class="line">    	日&lt;select id=<span class="string">"day"</span>&gt;<span class="xml"><span class="tag">&lt;<span class="name">option</span>&gt;</span>选择<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span></div><div class="line">    	&lt;script type=<span class="string">"text/javascript"</span>&gt;</div><div class="line">	    	<span class="keyword">var</span> date  = <span class="keyword">new</span> <span class="built_in">Date</span>().getFullYear();</div><div class="line">	    	<span class="keyword">var</span> years = [<span class="number">0</span>,<span class="number">2017</span>,<span class="number">2016</span>,<span class="number">2015</span>,<span class="number">2014</span>,<span class="number">2013</span>,<span class="number">2012</span>,<span class="number">2011</span>,<span class="number">2010</span>,<span class="number">2009</span>,<span class="number">2008</span>,<span class="number">2007</span>,<span class="number">2006</span>,<span class="number">2005</span>,<span class="number">2004</span>,<span class="number">2003</span>,<span class="number">2002</span>,<span class="number">2001</span>,<span class="number">2000</span>,<span class="number">1999</span>,<span class="number">1998</span>,<span class="number">1997</span>,<span class="number">1996</span>,<span class="number">1995</span>,<span class="number">1994</span>,<span class="number">1993</span>,<span class="number">1992</span>,<span class="number">1991</span>,<span class="number">1990</span>,<span class="number">1989</span>,<span class="number">1988</span>,<span class="number">1987</span>,<span class="number">1986</span>,<span class="number">1985</span>,<span class="number">1984</span>,<span class="number">1983</span>,<span class="number">1982</span>,<span class="number">1981</span>,<span class="number">1980</span>,<span class="number">1979</span>,<span class="number">1978</span>,<span class="number">1977</span>,<span class="number">1976</span>,<span class="number">1975</span>,<span class="number">1974</span>,<span class="number">1973</span>,<span class="number">1972</span>,<span class="number">1971</span>,<span class="number">1970</span>,<span class="number">1969</span>,<span class="number">1968</span>,<span class="number">1967</span>,<span class="number">1966</span>,<span class="number">1965</span>,<span class="number">1964</span>,<span class="number">1963</span>,<span class="number">1962</span>,<span class="number">1961</span>,<span class="number">1960</span>,<span class="number">1959</span>,<span class="number">1958</span>,<span class="number">1957</span>,<span class="number">1956</span>,<span class="number">1955</span>,<span class="number">1954</span>,<span class="number">1953</span>,<span class="number">1952</span>,<span class="number">1951</span>,<span class="number">1950</span>,<span class="number">1949</span>,<span class="number">1948</span>,<span class="number">1947</span>,<span class="number">1946</span>,<span class="number">1945</span>,<span class="number">1944</span>,<span class="number">1943</span>,<span class="number">1942</span>,<span class="number">1941</span>,<span class="number">1940</span>,<span class="number">1939</span>,<span class="number">1938</span>,<span class="number">1937</span>,<span class="number">1936</span>,<span class="number">1935</span>,<span class="number">1934</span>,<span class="number">1933</span>,<span class="number">1932</span>,<span class="number">1931</span>,<span class="number">1930</span>,<span class="number">1929</span>,<span class="number">1928</span>,<span class="number">1927</span>,<span class="number">1926</span>,<span class="number">1925</span>,<span class="number">1924</span>,<span class="number">1923</span>,<span class="number">1922</span>,<span class="number">1921</span>,<span class="number">1920</span>,<span class="number">1919</span>,<span class="number">1918</span>,<span class="number">1917</span>,<span class="number">1916</span>,<span class="number">1915</span>,<span class="number">1914</span>,<span class="number">1913</span>,<span class="number">1912</span>,<span class="number">1911</span>,<span class="number">1910</span>,<span class="number">1909</span>,<span class="number">1908</span>,<span class="number">1907</span>,<span class="number">1906</span>,<span class="number">1905</span>,<span class="number">1904</span>,<span class="number">1903</span>,<span class="number">1902</span>,<span class="number">1901</span>,<span class="number">1900</span>];</div><div class="line">	    	<span class="keyword">var</span> rmonths = [<span class="number">0</span>,<span class="number">31</span>,<span class="number">29</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>];</div><div class="line">	    	<span class="keyword">var</span> nrmonths = [<span class="number">0</span>,<span class="number">31</span>,<span class="number">28</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>];</div><div class="line">	    	<span class="keyword">var</span> months = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>,<span class="number">12</span>];</div><div class="line">	    	<span class="keyword">var</span> days = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>,<span class="number">14</span>,<span class="number">15</span>,<span class="number">16</span>,<span class="number">17</span>,<span class="number">18</span>,<span class="number">19</span>,<span class="number">20</span>,<span class="number">21</span>,<span class="number">22</span>,<span class="number">23</span>,<span class="number">24</span>,<span class="number">25</span>,<span class="number">26</span>,<span class="number">27</span>,<span class="number">28</span>,<span class="number">29</span>,<span class="number">30</span>,<span class="number">31</span>];</div><div class="line">	    	<span class="keyword">var</span> yearsNode = <span class="built_in">document</span>.getElementById(<span class="string">"year"</span>);</div><div class="line">	    	<span class="keyword">var</span> monthsNode = <span class="built_in">document</span>.getElementById(<span class="string">"month"</span>);</div><div class="line">	    	<span class="keyword">var</span> daysNode = <span class="built_in">document</span>.getElementById(<span class="string">"day"</span>);</div><div class="line">	    	</div><div class="line">	    	</div><div class="line">	    	<span class="comment">//year import</span></div><div class="line">	    	<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; years.length; i++) &#123;</div><div class="line">	    		<span class="keyword">var</span> optionNode = <span class="built_in">document</span>.createElement(<span class="string">"option"</span>);</div><div class="line">	    		optionNode.innerHTML=years[i];</div><div class="line">	    		yearsNode.appendChild(optionNode);</div><div class="line">	    	&#125;</div><div class="line">	    	<span class="comment">//month import</span></div><div class="line">	    	<span class="function"><span class="keyword">function</span> <span class="title">showMonth</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	    		monthsNode.options.length = <span class="number">1</span>;</div><div class="line">	    		<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; months.length; i++) &#123;</div><div class="line">		    		<span class="keyword">var</span> optionNode = <span class="built_in">document</span>.createElement(<span class="string">"option"</span>);</div><div class="line">		    		optionNode.innerHTML = months[i];</div><div class="line">		    		monthsNode.appendChild(optionNode);</div><div class="line">	    		&#125;</div><div class="line">	    	&#125;</div><div class="line">	    	<span class="comment">//day import</span></div><div class="line">	    	<span class="function"><span class="keyword">function</span> <span class="title">showDay</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	    		daysNode.options.length = <span class="number">1</span>;</div><div class="line">	    		<span class="keyword">var</span> r;</div><div class="line">	    		<span class="keyword">if</span>(yearsNode.value%<span class="number">4</span> == <span class="number">0</span>)&#123;</div><div class="line">	    			r = rmonths[monthsNode.value];</div><div class="line">	    		&#125;<span class="keyword">else</span>&#123;</div><div class="line">	    			r = nrmonths[monthsNode.value];</div><div class="line">	    		&#125;</div><div class="line">	    		<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= r; i++) &#123;</div><div class="line">	    			<span class="keyword">var</span> optionNode = <span class="built_in">document</span>.createElement(<span class="string">"option"</span>);</div><div class="line">	    			optionNode.innerHTML = days[i];</div><div class="line">	    			daysNode.appendChild(optionNode);</div><div class="line">	    		&#125;</div><div class="line">	    	&#125;</div><div class="line">			</div><div class="line">	    	</div><div class="line">    	&lt;<span class="regexp">/script&gt;</span></div><div class="line"><span class="regexp">    &lt;/</span>body&gt;</div><div class="line">&lt;<span class="regexp">/html&gt;</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/01/07/关于DOM编程/">关于DOM编程</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Bitamin Kim 的个人博客">Bitamin Kim</a></p>
+        <p><span>发布时间:</span>2017年01月07日 - 17时55分</p>
+        <p><span>最后更新:</span>2017年01月25日 - 02时01分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/01/07/关于DOM编程/" title="关于DOM编程">http://bitamin.pw/2017/01/07/关于DOM编程/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://bitamin.pw/2017/01/07/关于DOM编程/　　作者: Bitamin Kim" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2016/12/27/关于Html,Css,Js的一些基础知识要点/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">关于Html,Css,JavaScript的一些基础知识要点</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM-Document-Object-Model-文档对象模型"><span class="toc-number">1.</span> <span class="toc-text">DOM(Document Object Model) 文档对象模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#DOM编程通过标签属性获取节点的方法"><span class="toc-number">1.0.1.</span> <span class="toc-text">DOM编程通过标签属性获取节点的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DOM编程通过关系获取标签节点的方法"><span class="toc-number">1.0.2.</span> <span class="toc-text">DOM编程通过关系获取标签节点的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DOM编程-创建节点，插入节点"><span class="toc-number">1.0.3.</span> <span class="toc-text">DOM编程 创建节点，插入节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#利用DOM编程制作联动框"><span class="toc-number">1.0.4.</span> <span class="toc-text">利用DOM编程制作联动框</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#时间联动框例子"><span class="toc-number">1.0.5.</span> <span class="toc-text">时间联动框例子</span></a></li></ol></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2017/01/07/关于DOM编程/" data-title="关于DOM编程" data-url="http://bitamin.pw/2017/01/07/关于DOM编程/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"BitaminKim"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = '/js/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2016/12/27/关于Html,Css,Js的一些基础知识要点/" title="下一篇: 关于Html,Css,JavaScript的一些基础知识要点">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/01/07/关于DOM编程/">关于DOM编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/27/关于Html,Css,Js的一些基础知识要点/">关于Html,Css,JavaScript的一些基础知识要点</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/12/23/关于java的一些基础知识要点/">关于java的一些基础知识要点</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/07/25/留言板学习记录/">留言板的学习记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/25/PHP的学习记录/">PHP的学习记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/14/如何设置github和coding的pages域名绑定/">github和coding的pages共存</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/27/MySQL的命令总结-二/">MySQL的命令总结（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/25/MySQL的命令总结-一/">MySQL的命令总结(一)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/25/新的开始/">新的开始</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/01/hello-world/">Hello World</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2017 Bitamin Kim
+            </div>
+            <div class="footer-right">
+                <!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=0 height=0 src="http://music.163.com/outchain/player?type=2&id=413961906&auto=1&height=66"></iframe> -->
+		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/Bitaminkim/hexo-theme-Rem" target="_blank">Rem</a> by BitaminKim
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 6;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
