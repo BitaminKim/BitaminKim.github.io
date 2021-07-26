@@ -1,18 +1,19 @@
 // ==UserScript==
 // @name            网易BUFF价格比例(找挂刀)插件
+// @icon            https://gitee.com/pronax/drawing-bed/raw/master/wingman/Wingman.png
 // @homepageURL     https://greasyfork.org/zh-CN/users/412840-newell-gabe-l
 // @description     找挂刀，看比例，挑玄学
-// @version         2.3.10
-// @note            更新于2021年5月27日19:42:22
+// @version         2.3.21
+// @note            更新于2021年7月26日22:02:45
 // @author          Pronax
 // @copyright       2021, Pronax
 // @supportURL      https://jq.qq.com/?_wv=1027&k=U8mqorxQ
 // @feedback-url    https://jq.qq.com/?_wv=1027&k=U8mqorxQ
 // @license         AGPL-3.0
-// @match           https://buff.163.com/market/goods*
-// @match           https://buff.163.com/market/?game=*
-// @icon            https://gitee.com/pronax/drawing-bed/raw/master/wingman/Wingman.png
+// @match           https://buff.163.com/goods/*
+// @match           https://buff.163.com/market/*
 // @run-at          document-body
+// @require         https://cdn.jsdelivr.net/npm/notice.js@0.4.0/dist/notice.js
 // @grant           GM_xmlhttpRequest
 // @grant           GM_addStyle
 // @grant           GM_setValue
@@ -31,9 +32,17 @@
     if ($(".logo").hasClass("buffHelperLoaded")) { return; }
     $(".logo").addClass("buffHelperLoaded");
 
-    const steanOrderScaleTemp = "<span class=\"f_12px f_Bold l_Right\" style=\"margin-top: inherit;\"></span>";
-    const steanOrderNumberTemp = "<span class=\"f_12px c_Gray f_Bold l_Right\" style=\"margin-top: inherit;\"></span>";
-    const steanOrderNumberErrorTemp = "<span class=\"f_12px c_Gray f_Bold l_Right\" style=\"margin-top: inherit;color:#e45302 !important\"></span>";
+    // 全局（插件环境）异常捕获
+    window.onerror = function (e) {
+        console.log("行号：" + e.lineno + "<br/>列号：" + e.colno + "<br/>错误信息：" + e.message);
+        // let msg = "这也许是一个bug，你可以截图这个对话框后去设置页面底部找Q群链接加群进行反馈。" + "<br/>反馈时请将截图发给管理，感谢你的帮助。<hr/>行号：" + e.lineno + "<br/>列号：" + e.colno + "<br/>错误信息：" + e.message;
+        // showMessage("出现了意料之外的错误", msg, 300, "error");
+    }
+
+    const steamOrderScaleTemp = "<span class=\"f_12px f_Bold l_Right steam_temp steam_order_scale\"></span>";
+    const steamSoldNumberTemp = "<span class=\"f_12px c_Green f_Bold l_Right steam_temp steam_sold_number\"></span>";
+    const steamOrderNumberTemp = "<span class=\"f_12px c_Gray f_Bold l_Right steam_temp steam_order_number\"></span>";
+    const steamOrderNumberErrorTemp = "<span class=\"f_12px c_Gray f_Bold l_Right steam_temp steam_order_number_error\" style=\"color:#e45302 !important\"></span>";
     const g_rgCurrencyData = { "AED": { "strCode": "AED", "eCurrencyCode": 32, "strSymbol": "AED", "bSymbolIsPrefix": false, "bWholeUnitsOnly": false, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": " " }, "ARS": { "strCode": "ARS", "eCurrencyCode": 34, "strSymbol": "ARS$", "bSymbolIsPrefix": true, "bWholeUnitsOnly": false, "strDecimalSymbol": ",", "strThousandsSeparator": ".", "strSymbolAndNumberSeparator": " " }, "AUD": { "strCode": "AUD", "eCurrencyCode": 21, "strSymbol": "A$", "bSymbolIsPrefix": true, "bWholeUnitsOnly": false, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": " " }, "BGN": { "strCode": "BGN", "eCurrencyCode": 42, "strSymbol": "лв", "bSymbolIsPrefix": false, "bWholeUnitsOnly": false, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": " " }, "BRL": { "strCode": "BRL", "eCurrencyCode": 7, "strSymbol": "R$", "bSymbolIsPrefix": true, "bWholeUnitsOnly": false, "strDecimalSymbol": ",", "strThousandsSeparator": ".", "strSymbolAndNumberSeparator": " " }, "BYN": { "strCode": "BYN", "eCurrencyCode": 36, "strSymbol": "Br", "bSymbolIsPrefix": true, "bWholeUnitsOnly": false, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": "" }, "CAD": { "strCode": "CAD", "eCurrencyCode": 20, "strSymbol": "CDN$", "bSymbolIsPrefix": true, "bWholeUnitsOnly": false, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": " " }, "CHF": { "strCode": "CHF", "eCurrencyCode": 4, "strSymbol": "CHF", "bSymbolIsPrefix": true, "bWholeUnitsOnly": false, "strDecimalSymbol": ".", "strThousandsSeparator": " ", "strSymbolAndNumberSeparator": " " }, "CLP": { "strCode": "CLP", "eCurrencyCode": 25, "strSymbol": "CLP$", "bSymbolIsPrefix": true, "bWholeUnitsOnly": true, "strDecimalSymbol": ",", "strThousandsSeparator": ".", "strSymbolAndNumberSeparator": " " }, "CNY": { "strCode": "CNY", "eCurrencyCode": 23, "strSymbol": "¥", "bSymbolIsPrefix": true, "bWholeUnitsOnly": true, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": " " }, "COP": { "strCode": "COP", "eCurrencyCode": 27, "strSymbol": "COL$", "bSymbolIsPrefix": true, "bWholeUnitsOnly": true, "strDecimalSymbol": ",", "strThousandsSeparator": ".", "strSymbolAndNumberSeparator": " " }, "CRC": { "strCode": "CRC", "eCurrencyCode": 40, "strSymbol": "₡", "bSymbolIsPrefix": true, "bWholeUnitsOnly": true, "strDecimalSymbol": ",", "strThousandsSeparator": ".", "strSymbolAndNumberSeparator": "" }, "CZK": { "strCode": "CZK", "eCurrencyCode": 44, "strSymbol": "Kč", "bSymbolIsPrefix": false, "bWholeUnitsOnly": false, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": " " }, "DKK": { "strCode": "DKK", "eCurrencyCode": 45, "strSymbol": "kr.", "bSymbolIsPrefix": false, "bWholeUnitsOnly": false, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": " " }, "EUR": { "strCode": "EUR", "eCurrencyCode": 3, "strSymbol": "€", "bSymbolIsPrefix": false, "bWholeUnitsOnly": false, "strDecimalSymbol": ",", "strThousandsSeparator": " ", "strSymbolAndNumberSeparator": "" }, "GBP": { "strCode": "GBP", "eCurrencyCode": 2, "strSymbol": "£", "bSymbolIsPrefix": true, "bWholeUnitsOnly": false, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": "" }, "HKD": { "strCode": "HKD", "eCurrencyCode": 29, "strSymbol": "HK$", "bSymbolIsPrefix": true, "bWholeUnitsOnly": false, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": " " }, "HRK": { "strCode": "HRK", "eCurrencyCode": 43, "strSymbol": "kn", "bSymbolIsPrefix": false, "bWholeUnitsOnly": false, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": " " }, "HUF": { "strCode": "HUF", "eCurrencyCode": 46, "strSymbol": "Ft", "bSymbolIsPrefix": false, "bWholeUnitsOnly": false, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": " " }, "IDR": { "strCode": "IDR", "eCurrencyCode": 10, "strSymbol": "Rp", "bSymbolIsPrefix": true, "bWholeUnitsOnly": true, "strDecimalSymbol": ".", "strThousandsSeparator": " ", "strSymbolAndNumberSeparator": " " }, "ILS": { "strCode": "ILS", "eCurrencyCode": 35, "strSymbol": "₪", "bSymbolIsPrefix": true, "bWholeUnitsOnly": false, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": "" }, "INR": { "strCode": "INR", "eCurrencyCode": 24, "strSymbol": "₹", "bSymbolIsPrefix": true, "bWholeUnitsOnly": true, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": " " }, "JPY": { "strCode": "JPY", "eCurrencyCode": 8, "strSymbol": "¥", "bSymbolIsPrefix": true, "bWholeUnitsOnly": true, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": " " }, "KRW": { "strCode": "KRW", "eCurrencyCode": 16, "strSymbol": "₩", "bSymbolIsPrefix": true, "bWholeUnitsOnly": true, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": " " }, "KWD": { "strCode": "KWD", "eCurrencyCode": 38, "strSymbol": "KD", "bSymbolIsPrefix": false, "bWholeUnitsOnly": false, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": " " }, "KZT": { "strCode": "KZT", "eCurrencyCode": 37, "strSymbol": "₸", "bSymbolIsPrefix": false, "bWholeUnitsOnly": true, "strDecimalSymbol": ",", "strThousandsSeparator": " ", "strSymbolAndNumberSeparator": "" }, "MXN": { "strCode": "MXN", "eCurrencyCode": 19, "strSymbol": "Mex$", "bSymbolIsPrefix": true, "bWholeUnitsOnly": false, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": " " }, "MYR": { "strCode": "MYR", "eCurrencyCode": 11, "strSymbol": "RM", "bSymbolIsPrefix": true, "bWholeUnitsOnly": false, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": "" }, "NOK": { "strCode": "NOK", "eCurrencyCode": 9, "strSymbol": "kr", "bSymbolIsPrefix": false, "bWholeUnitsOnly": false, "strDecimalSymbol": ",", "strThousandsSeparator": ".", "strSymbolAndNumberSeparator": " " }, "NXP": { "strCode": "NXP", "eCurrencyCode": 9001, "strSymbol": "원", "bSymbolIsPrefix": false, "bWholeUnitsOnly": true, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": "" }, "NZD": { "strCode": "NZD", "eCurrencyCode": 22, "strSymbol": "NZ$", "bSymbolIsPrefix": true, "bWholeUnitsOnly": false, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": " " }, "PEN": { "strCode": "PEN", "eCurrencyCode": 26, "strSymbol": "S/.", "bSymbolIsPrefix": true, "bWholeUnitsOnly": false, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": "" }, "PHP": { "strCode": "PHP", "eCurrencyCode": 12, "strSymbol": "P", "bSymbolIsPrefix": true, "bWholeUnitsOnly": false, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": "" }, "PLN": { "strCode": "PLN", "eCurrencyCode": 6, "strSymbol": "zł", "bSymbolIsPrefix": false, "bWholeUnitsOnly": false, "strDecimalSymbol": ",", "strThousandsSeparator": " ", "strSymbolAndNumberSeparator": "" }, "QAR": { "strCode": "QAR", "eCurrencyCode": 39, "strSymbol": "QR", "bSymbolIsPrefix": false, "bWholeUnitsOnly": false, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": " " }, "RMB": { "strCode": "RMB", "eCurrencyCode": 23, "strSymbol": "¥", "bSymbolIsPrefix": true, "bWholeUnitsOnly": true, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": " " }, "RON": { "strCode": "RON", "eCurrencyCode": 47, "strSymbol": "lei", "bSymbolIsPrefix": false, "bWholeUnitsOnly": false, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": " " }, "RUB": { "strCode": "RUB", "eCurrencyCode": 5, "strSymbol": "pуб.", "bSymbolIsPrefix": false, "bWholeUnitsOnly": true, "strDecimalSymbol": ",", "strThousandsSeparator": "", "strSymbolAndNumberSeparator": " " }, "SAR": { "strCode": "SAR", "eCurrencyCode": 31, "strSymbol": "SR", "bSymbolIsPrefix": false, "bWholeUnitsOnly": false, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": " " }, "SEK": { "strCode": "SEK", "eCurrencyCode": 33, "strSymbol": "kr", "bSymbolIsPrefix": false, "bWholeUnitsOnly": false, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": " " }, "SGD": { "strCode": "SGD", "eCurrencyCode": 13, "strSymbol": "S$", "bSymbolIsPrefix": true, "bWholeUnitsOnly": false, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": "" }, "THB": { "strCode": "THB", "eCurrencyCode": 14, "strSymbol": "฿", "bSymbolIsPrefix": true, "bWholeUnitsOnly": false, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": "" }, "TRY": { "strCode": "TRY", "eCurrencyCode": 17, "strSymbol": "TL", "bSymbolIsPrefix": false, "bWholeUnitsOnly": false, "strDecimalSymbol": ",", "strThousandsSeparator": ".", "strSymbolAndNumberSeparator": " " }, "TWD": { "strCode": "TWD", "eCurrencyCode": 30, "strSymbol": "NT$", "bSymbolIsPrefix": true, "bWholeUnitsOnly": true, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": " " }, "UAH": { "strCode": "UAH", "eCurrencyCode": 18, "strSymbol": "₴", "bSymbolIsPrefix": false, "bWholeUnitsOnly": true, "strDecimalSymbol": ",", "strThousandsSeparator": " ", "strSymbolAndNumberSeparator": "" }, "USD": { "strCode": "USD", "eCurrencyCode": 1, "strSymbol": "$", "bSymbolIsPrefix": true, "bWholeUnitsOnly": false, "strDecimalSymbol": ".", "strThousandsSeparator": ",", "strSymbolAndNumberSeparator": "" }, "UYU": { "strCode": "UYU", "eCurrencyCode": 41, "strSymbol": "$U", "bSymbolIsPrefix": true, "bWholeUnitsOnly": true, "strDecimalSymbol": ",", "strThousandsSeparator": ".", "strSymbolAndNumberSeparator": "" }, "VND": { "strCode": "VND", "eCurrencyCode": 15, "strSymbol": "₫", "bSymbolIsPrefix": false, "bWholeUnitsOnly": true, "strDecimalSymbol": ",", "strThousandsSeparator": ".", "strSymbolAndNumberSeparator": "" }, "ZAR": { "strCode": "ZAR", "eCurrencyCode": 28, "strSymbol": "R", "bSymbolIsPrefix": true, "bWholeUnitsOnly": false, "strDecimalSymbol": ".", "strThousandsSeparator": " ", "strSymbolAndNumberSeparator": " " } }
     const enhancement_support_list = Array("rifle", "knife", "pistol", "smg", "machinegun", "shotgun", "hands");
     const strLengthLimit = { "USD": 18, "RUB": 17, "CNY": 18, "EUR": 19 };
@@ -42,6 +51,7 @@
         minRange: 0.63,
         needSort: null,
         pageSize: 20,
+        reverseSticker: false,
         orderFloatLeft: false,
         overrideSortRule: false,
         sortAfterAllDone: true,
@@ -55,6 +65,7 @@
     var helper_config;
     var displayCurrency;
     var steamCurrency;
+    var resetConfigtTimeout;
     var steamConnection = undefined;
     var steamFailedTimes = 0;
     var market_color_high = [];
@@ -63,15 +74,102 @@
     var itemNum = 0;
     var needSort;
 
+    // 通知CSS
+    GM_addStyle(".noticejs-top{top:0;width:100%!important}.noticejs-top .item{border-radius:0!important;margin:0!important}.noticejs-topRight{top:10px;right:10px}.noticejs-topLeft{top:10px;left:10px}.noticejs-topCenter{top:10px;left:50%;transform:translate(-50%)}.noticejs-middleLeft,.noticejs-middleRight{right:10px;top:50%;transform:translateY(-50%)}.noticejs-middleLeft{left:10px}.noticejs-middleCenter{top:50%;left:50%;transform:translate(-50%,-50%)}.noticejs-bottom{bottom:0;width:100%!important}.noticejs-bottom .item{border-radius:0!important;margin:0!important}.noticejs-bottomRight{bottom:10px;right:10px}.noticejs-bottomLeft{bottom:10px;left:10px}.noticejs-bottomCenter{bottom:10px;left:50%;transform:translate(-50%)}.noticejs{font-family:Helvetica Neue,Helvetica,Arial,sans-serif}.noticejs .item{margin:0 0 10px;border-radius:3px;overflow:hidden}.noticejs .item .close{cursor:pointer;width:21px;height:21px;text-align: center;margin-top: -3px;margin-right: -3px;float:right;font-size:18px;font-weight:700;line-height:1;color:#fff;text-shadow:0 1px 0 #fff;opacity:1;}.noticejs .item .close:hover{opacity:.5;color:#000}.noticejs .item a{color:#fff;border-bottom:1px dashed #fff}.noticejs .item a,.noticejs .item a:hover{text-decoration:none}.noticejs .success{background-color:#64ce83}.noticejs .success .noticejs-heading{background-color:#3da95c;color:#fff;padding:5px}.noticejs .success .noticejs-body{color:#fff;padding:10px}.noticejs .success .noticejs-body:hover{visibility:visible!important}.noticejs .success .noticejs-content{visibility:visible}.noticejs .info{background-color:#3ea2ff}.noticejs .info .noticejs-heading{background-color:#067cea;color:#fff;padding:5px}.noticejs .info .noticejs-body{color:#fff;padding:10px}.noticejs .info .noticejs-body:hover{visibility:visible!important}.noticejs .info .noticejs-content{visibility:visible}.noticejs .warning{background-color:#ff7f48}.noticejs .warning .noticejs-heading{background-color:#f44e06;color:#fff;padding:5px}.noticejs .warning .noticejs-body{color:#fff;padding:10px}.noticejs .warning .noticejs-body:hover{visibility:visible!important}.noticejs .warning .noticejs-content{visibility:visible}.noticejs .error{background-color:#e74c3c}.noticejs .error .noticejs-heading{background-color:#ba2c1d;color:#fff;padding:5px}.noticejs .error .noticejs-body{color:#fff;padding:10px}.noticejs .error .noticejs-body:hover{visibility:visible!important}.noticejs .error .noticejs-content{visibility:visible}.noticejs .progressbar{width:100%}.noticejs .progressbar .bar{width:1%;height:30px;background-color:#4caf50}.noticejs .success .noticejs-progressbar{width:100%;background-color:#64ce83;margin-top:-1px}.noticejs .success .noticejs-progressbar .noticejs-bar{width:100%;height:5px;background:#3da95c}.noticejs .info .noticejs-progressbar{width:100%;background-color:#3ea2ff;margin-top:-1px}.noticejs .info .noticejs-progressbar .noticejs-bar{width:100%;height:5px;background:#067cea}.noticejs .warning .noticejs-progressbar{width:100%;background-color:#ff7f48;margin-top:-1px}.noticejs .warning .noticejs-progressbar .noticejs-bar{width:100%;height:5px;background:#f44e06}.noticejs .error .noticejs-progressbar{width:100%;background-color:#e74c3c;margin-top:-1px}.noticejs .error .noticejs-progressbar .noticejs-bar{width:100%;height:5px;background:#ba2c1d}@keyframes noticejs-fadeOut{0%{opacity:1}to{opacity:0}}.noticejs-fadeOut{animation-name:noticejs-fadeOut}@keyframes noticejs-modal-in{to{opacity:.3}}@keyframes noticejs-modal-out{to{opacity:0}}.noticejs-rtl .noticejs-heading{direction:rtl}.noticejs-rtl .close{float:left!important;margin-left:7px;margin-right:0!important}.noticejs-rtl .noticejs-content{direction:rtl}.noticejs{position:fixed;z-index:10050;width:320px}.noticejs ::-webkit-scrollbar{width:8px}.noticejs ::-webkit-scrollbar-button{width:8px;height:5px}.noticejs ::-webkit-scrollbar-track{border-radius:10px}.noticejs ::-webkit-scrollbar-thumb{background:hsla(0,0%,100%,.5);border-radius:10px}.noticejs ::-webkit-scrollbar-thumb:hover{background:#fff}.noticejs-modal{position:fixed;width:100%;height:100%;background-color:#000;z-index:10000;opacity:.3;left:0;top:0}.noticejs-modal-open{opacity:0;animation:noticejs-modal-in .3s ease-out}.noticejs-modal-close{animation:noticejs-modal-out .3s ease-out;animation-fill-mode:forwards}");
     // 设置界面
-    GM_addStyle(".helper-setting input[type=number]{max-width:70px}input[type=\"number\"]{-moz-appearance:textfield}.helper-setting-shadow{position:fixed;justify-content:center;align-items:center;display:none;z-index:100;top:0;right:0;bottom:0;left:0;margin:0;background:#00000066}.helper-setting{background:#fff;border-radius:5px;padding:30px 40px 10px;top:25%}.w-Checkbox.helper-setting-option>span:first-child{margin:0!important;font-size:14px}.helper-setting-steamConnection i.icon{margin-left:0!important}.helper-setting .list_tb span,.helper-setting .list_tb i.icon{margin-left:12px}.helper-setting .icon_status_progressing{animation:rotate-L 1.5s linear infinite;-webkit-animation:rotate-L 1.5s linear infinite}.helper-setting>.list_tb tr:last-child>td{border-bottom:0}.helper-setting td.setting-title{height:0;border:0;padding:5px 0 0 0}");
-    $("body").append('<div class="cont_main helper-setting-shadow"><div class="helper-setting"><b>基础设定</b><span id="helper-version" style="float: right;">插件版本：</span><table class="list_tb"><tbody><tr><td class="t_Left c_Gray">STEAM连接性：</td><td class="t_Left helper-setting-steamConnection"><span class="c_Yellow"><i class="icon icon_status_waiting"></i>未知</span></td><td class="t_Right"><span class="c_DGrey steamConnectionCountdown" style="display: none;"></span><a href="javascript:void(0);" id="helper-setting-checkBtn" class="i_Btn i_Btn_small">检测</a></td></tr><tr><td class="t_Left c_Gray">steam参考货币</td><td class="t_Left"><span><div id="helper-setting-currency" class="w-Select helper-setting-option" data-option-target="steamCurrency" style="width: 120px; visibility: visible;"><h3 style="margin:0;font-weight:normal;">默认</h3><i class="icon icon_drop"></i><ul style="width: 120px;height: 200px;overflow: auto;" class="steam-currency-selector"></ul></div></span></td><td class="t_Center"><i class="icon icon_qa j_tips_handler" style="margin-left: 0;" data-title="&lt;p class=&quot;c_Red&quot;&gt;没有特殊需求就不要改&lt;/p&gt;" data-content="选择获取steam数据时使用什么货币，buff价格依旧是人民币，乱改会导致比例错误。默认为CNY（￥）" data-direction="right"></i><span><div id="helper-setting-currencyDisplayMode" class="w-Select helper-setting-option" data-option-target="currencyDisplayMode" style="width: 80px; visibility: visible;"><h3 style="margin:0;font-weight:normal;">默认</h3><i class="icon icon_drop"></i><ul style="width: 80px;"><li value="strCode">缩写</li><li value="strSymbol">符号</li></ul></div></span></td></tr></tbody><tbody><tr><td class="t_Left setting-title" colspan="3"><b>市场页设定</b></td></tr><tr><td class="t_Left c_Gray" width="120">覆盖排序规则</td><td class="t_Left"><span><div id="helper-setting-stickerSort" class="w-Checkbox helper-setting-option" data-option-target="overrideSortRule" value=""><span value="true"><i class="icon icon_checkbox"></i>启用 </span></div></span><i class="icon icon_qa j_tips_handler" data-title="说明：" data-content="开启后使用buff排序（比如当你按价格排序时）比例排序规则重置为默认，不再按比例排序（刷新页面后会恢复保存的规则）" data-direction="right"></i></td><td class="t_Right"></td></tr><tr><td class="t_Left c_Gray" width="120">完成后排序</td><td class="t_Left"><span><div id="helper-setting-sortAfterAllDone" class="w-Checkbox helper-setting-option" data-option-target="sortAfterAllDone" value=""><span value="true"><i class="icon icon_checkbox"></i>启用 </span></div></span><i class="icon icon_qa j_tips_handler" data-title="说明：" data-content="启用时会等所有饰品比例都加载完成再进行排序，关闭时每加载完一个饰品就排序一次" data-direction="right"></i></td><td class="t_Right"></td></tr><tr><td class="t_Left c_Gray">默认排序规则</td><td class="t_Left"><span><div id="helper-setting-sortRule" class="w-Select helper-setting-option" data-option-target="needSort" style="width: 130px; visibility: visible;"><h3 style="margin:0;font-weight:normal;">不排序</h3><i class="icon icon_drop"></i><ul style="width: 130px;"><li value="null">不排序</li><li value="buff-sort_asc">按buff比例从低到高</li><li value="buff-sort_desc">按buff比例从高到低</li><li value="order-sort_asc">按求购比例从低到高</li><li value="order-sort_desc">按求购比例从高到低</li></ul></div></span></td><td class="t_Right"></td></tr><tr><td class="t_Left c_Gray">每页显示数量</td><td class="t_Left" style="position: relative;"><span><input type="number" id="helper-setting-pageSize" data-option-target="pageSize" class="i_Text helper-setting-option" min="1" max="80" step="1"></span><i class="icon icon_qa j_tips_handler" data-title="&lt;p class=&quot;c_Red&quot;&gt;可能加大封号风险&lt;/p&gt;" data-content="修改每页显示数量，由于buff反爬虫机制尚不明确，封号概率可能增加也可能减少，谨慎使用，默认值20，最大值80" data-direction="right"></i></td><td class="t_Right"></td></tr><tr><td class="t_Left c_Gray">渐变色</td><td class="t_Left" colspan="2" style="position: relative;"><span class="c_DGray">最小 <input type="color" id="helper-setting-marketColorLow" data-option-target="marketColorLow" class="helper-setting-option"></span><i class="icon icon_qa j_tips_handler" data-title="" data-content="渐变最小值：比例越接近最小值（默认是0.63）会越趋近这个颜色<br/>渐变最大值：比例越接近最大值（默认是1）会越趋近这个颜色" data-direction="bottom"></i><span class="c_DGray">最大 <input type="color" id="helper-setting-marketColorHigh" data-option-target="marketColorHigh" class="helper-setting-option"></span></td></tr><tr><td class="t_Left c_Gray">比例极值</td><td class="t_Left" colspan="2" style="position: relative;"><span class="c_DGray">最小 <input type="number" id="helper-setting-minRange" data-option-target="minRange" class="i_Text helper-setting-option" min="0" max="1" step="0.01"></span><i class="icon icon_qa j_tips_handler" data-title="" data-content="比例最小值：小于等于这个值的比例会直接渲染成最小值渐变色<br/>比例最大值：大于等于这个值的比例会直接渲染成最大值渐变色" data-direction="bottom"></i><span class="c_DGray">最大 <input type="number" id="helper-setting-maxRange" data-option-target="maxRange" class="i_Text helper-setting-option" min="1" max="100"></span></td></tr></tbody><tbody><tr><td class="t_Left setting-title" colspan="3"><b>详情页设定</b></td></tr><tr><td class="t_Left c_Gray">求购列表靠左显示</td><td class="t_Left" style="position: relative;"><span><div id="helper-setting-orderFloatLeft" class="w-Checkbox helper-setting-option" data-option-target="orderFloatLeft" value=""><span value="true"><i class="icon icon_checkbox"></i>启用 </span></div></span><i class="icon icon_qa j_tips_handler" data-title="说明：" data-content="决定求购列表是否显示在左侧（饰品图片之后）" data-direction="right"></i></td><td class="t_Right"></td></tr><tr><td class="t_Center" colspan="3"><a href="https://greasyfork.org/zh-CN/scripts/410137-%E7%BD%91%E6%98%93buff%E4%BB%B7%E6%A0%BC%E6%AF%94%E4%BE%8B-%E6%89%BE%E6%8C%82%E5%88%80-%E6%8F%92%E4%BB%B6">本插件完全免费，让你付费购买的都是骗子</a></td></tr><tr><td class="t_Center" colspan="3"><a href="https://jq.qq.com/?_wv=1027&k=U8mqorxQ">反馈QQ群：544144372</a><span><a href="javascript:void(0);" id="helper-setting-resetAll" class="i_Btn i_Btn_small">恢复默认设置</a></span></td></tr></tbody></table></div></div>');
+    GM_addStyle(".helper_importantA{font-size:22px;font-weight:bold;color:#ec7a46 !important}.helper_importantA:hover{color:#e23537 !important}.helper-setting input[type=number]{max-width:70px}input[type=\"number\"]{-moz-appearance:textfield}.helper-setting-shadow{position:fixed;justify-content:center;align-items:center;display:none;z-index:100;top:0;right:0;bottom:0;left:0;margin:0;background:#00000066}.helper-setting{background:#fff;border-radius:5px;padding:30px 40px 10px;top:25%;opacity:0.95;}.w-Checkbox.helper-setting-option>span:first-child{margin:0!important;font-size:14px}.helper-setting-steamConnection i.icon{margin-left:0!important}.helper-setting .list_tb span,.helper-setting .list_tb i.icon{margin-left:12px}.helper-setting .icon_status_progressing{animation:rotate-L 1.5s linear infinite;-webkit-animation:rotate-L 1.5s linear infinite}.helper-setting>.list_tb tr:last-child>td{border-bottom:0}.helper-setting td.setting-title{height:0;border:0;padding:5px 0 0 0}");
+    $("body").append('<div class="cont_main helper-setting-shadow"><div class="helper-setting"><b>基础设定</b><span id="helper-version" style="float: right;">插件版本：</span><table class="list_tb"><tbody><tr><td class="t_Left c_Gray">STEAM连接性：</td><td class="t_Left helper-setting-steamConnection"><span class="c_Yellow"><i class="icon icon_status_waiting"></i>未知</span></td><td class="t_Right"><span class="c_DGrey steamConnectionCountdown" style="display: none;"></span><a href="javascript:void(0);" id="helper-setting-checkBtn" class="i_Btn i_Btn_small">检测</a></td></tr><tr><td class="t_Left c_Gray">Steam参考货币</td><td class="t_Left" colspan="2"><span><div id="helper-setting-currency" class="w-Select helper-setting-option" data-option-target="steamCurrency" style="width: 120px; visibility: visible;"><h3 style="margin:0;font-weight:normal;">默认</h3><i class="icon icon_drop"></i><ul style="width: 120px;height: 200px;overflow: auto;" class="steam-currency-selector"></ul></div></span><i class="icon icon_qa j_tips_handler helper-warning-currency" data-title="&lt;p class=&quot;f_Bold c_Red&quot;&gt;不要随便修改&lt;/p&gt;" data-content="选择获取steam数据时使用什么货币，&lt;span class=&quot;f_Bold c_Red&quot;&gt;如果你没有自己研究过修改效果与汇率关系，就不要乱动，修改只会导致比例错误。&lt;/span&gt;大概只有特别喜欢折腾的人才能用的上吧。&lt;br/&gt;默认为CNY（￥）" data-direction="right"></i><span><div id="helper-setting-currencyDisplayMode" class="w-Select helper-setting-option" data-option-target="currencyDisplayMode" style="width: 80px; visibility: visible;"><h3 style="margin:0;font-weight:normal;">默认</h3><i class="icon icon_drop"></i><ul style="width: 80px;"><li value="strCode">缩写</li><li value="strSymbol">符号</li></ul></div></span></td></tr></tbody><tbody><tr><td class="t_Left setting-title" colspan="3"><b>市场页设定</b></td></tr><tr><td class="t_Left c_Gray" width="120">覆盖排序规则</td><td class="t_Left"><span><div id="helper-setting-stickerSort" class="w-Checkbox helper-setting-option" data-option-target="overrideSortRule" value=""><span value="true"><i class="icon icon_checkbox"></i>启用 </span></div></span><i class="icon icon_qa j_tips_handler" data-title="说明：" data-content="开启后使用buff排序（比如当你按价格排序时）比例排序规则重置为默认，不再按比例排序（刷新页面后会恢复保存的规则）" data-direction="right"></i></td><td class="t_Right"></td></tr><tr><td class="t_Left c_Gray" width="120">完成后排序</td><td class="t_Left"><span><div id="helper-setting-sortAfterAllDone" class="w-Checkbox helper-setting-option" data-option-target="sortAfterAllDone" value=""><span value="true"><i class="icon icon_checkbox"></i>启用 </span></div></span><i class="icon icon_qa j_tips_handler" data-title="说明：" data-content="启用时会等所有饰品比例都加载完成再进行排序，关闭时每加载完一个饰品就排序一次" data-direction="right"></i></td><td class="t_Right"></td></tr><tr><td class="t_Left c_Gray">默认排序规则</td><td class="t_Left"><span><div id="helper-setting-sortRule" class="w-Select helper-setting-option" data-option-target="needSort" style="visibility: visible;"><h3 style="margin:0;font-weight:normal;">不排序</h3><i class="icon icon_drop"></i><ul style="width: 130px;"><li value="null">不排序</li><li value="buff-sort_asc">按buff比例从低到高</li><li value="buff-sort_desc">按buff比例从高到低</li><li value="order-sort_asc">按求购比例从低到高</li><li value="order-sort_desc">按求购比例从高到低</li></ul></div></span></td><td class="t_Right"></td></tr><tr><td class="t_Left c_Gray">每页显示数量</td><td class="t_Left"><span><input type="number" id="helper-setting-pageSize" data-option-target="pageSize" class="i_Text helper-setting-option" min="1" max="80" step="1"></span><i class="icon icon_qa j_tips_handler helper-warning-pageNum" data-title="&lt;p class=&quot;c_Red&quot;&gt;可能加大封号风险&lt;/p&gt;" data-content="修改每页显示数量，由于buff反爬虫机制尚不明确，封号概率可能增加也可能减少，谨慎使用，默认值20，最大值80" data-direction="right"></i></td><td class="t_Right"></td></tr><tr><td class="t_Left c_Gray">渐变色</td><td class="t_Left" colspan="2"><span class="c_DGray">最小 <input type="color" id="helper-setting-marketColorLow" data-option-target="marketColorLow" class="helper-setting-option"></span><i class="icon icon_qa j_tips_handler" data-title="" data-content="渐变最小值：比例越接近最小值（默认是0.63）会越趋近这个颜色<br/>渐变最大值：比例越接近最大值（默认是1）会越趋近这个颜色" data-direction="bottom"></i><span class="c_DGray">最大 <input type="color" id="helper-setting-marketColorHigh" data-option-target="marketColorHigh" class="helper-setting-option"></span></td></tr><tr><td class="t_Left c_Gray">比例极值</td><td class="t_Left" colspan="2"><span class="c_DGray">最小 <input type="number" id="helper-setting-minRange" data-option-target="minRange" class="i_Text helper-setting-option" min="0" max="1" step="0.01"></span><i class="icon icon_qa j_tips_handler" data-title="" data-content="比例最小值：小于等于这个值的比例会直接渲染成最小值渐变色<br/>比例最大值：大于等于这个值的比例会直接渲染成最大值渐变色" data-direction="bottom"></i><span class="c_DGray">最大 <input type="number" id="helper-setting-maxRange" data-option-target="maxRange" class="i_Text helper-setting-option" min="1" max="100"></span></td></tr></tbody><tbody><tr><td class="t_Left setting-title" colspan="3"><b>商品页设定</b></td></tr><tr><td class="t_Left c_Gray">求购列表靠左显示</td><td class="t_Left"><span><div id="helper-setting-orderFloatLeft" class="w-Checkbox helper-setting-option" data-option-target="orderFloatLeft"><span value="true"><i class="icon icon_checkbox"></i>启用 </span></div></span><i class="icon icon_qa j_tips_handler" data-title="说明：" data-content="决定求购列表是否显示在左侧（饰品图片之后）" data-direction="right"></i></td><td class="t_Right"></td></tr><tr><td class="t_Left c_Gray">反向贴纸顺序</td><td class="t_Left"><span><div id="helper-setting-reverseSticker" class="w-Checkbox helper-setting-option" data-option-target="reverseSticker"><span value="true"><i class="icon icon_checkbox"></i>启用 </span></div></span><i class="icon icon_qa j_tips_handler" data-title="说明：" data-content="将饰品贴纸的顺序倒转，保持和检视时枪上的顺序一样" data-direction="right"></i></td><td class="t_Right"></td></tr><tr><td class="t_Center" colspan="3"><a href="https://greasyfork.org/zh-CN/scripts/410137" class="helper_importantA">插件免费 请勿上当 官网安装 防止篡改</a><br /></td></tr><tr><td class="t_Center" colspan="3"><a href="https://greasyfork.org/zh-CN/scripts/410137">插件官网</a><span><a href="https://greasyfork.org/zh-CN/scripts/410137#support">常见问题</a></span><span><a href="javascript:void(0);" id="helper-setting-resetAll" class="i_Btn i_Btn_small">恢复默认设置</a></span><span><a href="https://jq.qq.com/?_wv=1027&k=U8mqorxQ">反馈Q群：544144372</a></span></td></tr></tbody></table></div></div>');
     helper_config = loadConfig();
-    displayCurrency = getDisplayCurrency();
     // 添加翻页和设置按钮，初始化部分数据
     initHelper();
     // 初始化货币
     initCurrency();
+
+    $(function () {
+        displayCurrency = getDisplayCurrency();
+    })
+
+    if (location.pathname.startsWith("/goods/")) {
+        // 自带css
+        GM_addStyle(".market_commodity_orders_header_promote {color: whitesmoke;}#steam_sold{margin-top:5px}#steam_order{margin-top:5px}#steam_order_error{margin-top:5px;font-size: medium;font-weight: bold;color: #ff1e3e;}.market_listing_price_with_fee{color: #ffae3a;font-size: 12px;margin-left: 6px;}");
+        GM_addStyle(".steam-link{float:right;margin-top:3px}.detail-cont>.blank20{height:10px}");
+        // 组件css
+        GM_addStyle(".paymentIcon{padding:1px 14px 0 !important;position:absolute}a.j_shoptip_handler{margin-right:10px}.user-thum{margin: 0;}.icon_payment_alipay{background-position:-534px -20px}.icon_payment_others{background-position:-510px 0}.list_tb_csgo>tr>th:first-child{width:10px}.list_tb_csgo>tr>th:nth-child(2){padding-right:9px}.list_tb_csgo .pic-cont{width:112px;height:84px}.list_tb_csgo .pic-cont img{height:-webkit-fill-available;max-height:max-content;}.csgo_sticker.has_wear{position:absolute;margin-left:230px;}.sticker_parent_div{margin:14px 0 0 360px !important}.csgo_sticker.has_wear .stickers{width:62px;height:48px;margin:0;background: 0;}.stag{margin:0 0 0 2px !important;padding: 4px 6px;float:none !important}.float_rank{color: green;}.stickers:hover{opacity:1!important}");
+        GM_addStyle(".tooltip .tooltiptext{visibility:hidden;border: 1px solid #d0d0d0;width:128px;height:96px;background-color:#fbfbfbc7;position:absolute;z-index:60;bottom:100%;margin-left:-62px;border-radius:10px}.tooltip:hover .tooltiptext{visibility:visible}");
+        // 求购列表css
+        GM_addStyle(".market_commodity_orders_table{margin: 0 0 0 10px;height:100%;float:right;border-collapse:separate;background-color:rgba(0,0,0,0.3);}.market_commodity_orders_table tr:nth-child(even){background-color:#242b33}.market_commodity_orders_table td{text-align:center;padding:4px}.market_commodity_orders_table th{padding:4px;margin:0;text-align:center;font-size:16px;font-weight:normal}");
+
+        $(".detail-pic").css("background-repeat", "round").children().width(250);
+        if ($("#j_game-switcher").data("current") == "dota2") {
+            $(".detail-cont>p").append($(".detail-summ>a").clone().addClass("steam-link"));
+        } else {
+            $(".detail-cont>div:first").append($(".detail-summ>a").clone().addClass("steam-link"));
+        }
+        // 适配 ”饰品比例计算脚本“
+        $(".detail-summ>a").hide();
+        $(".detail-cont").css("margin-left", 0);
+
+        $(document).ajaxSuccess(function (event, status, header, result) {
+            if (/^\/api\/market\/goods\/sell_order/.exec(header.url) && result.data) {
+                steamFailedTimes = 0;
+                buffHelperModule_inspestEnhancementCsgo(result.data);
+                buffHelperGoodsDetailScale(result.data);
+            }
+        });
+    } else if (location.pathname.startsWith("/market/")) {
+        $(document).ajaxSend(function (event, xhr, header, result) {
+            if (/^\/api\/market\/goods/.exec(header.url)) {
+                header.url += "&page_size=" + helper_config.pageSize;
+                $(".helper-progress-bar").remove();
+                $(".helper-loading").remove();
+                steamFailedTimes = 0;
+            }
+        });
+        // 主要样式
+        GM_addStyle(".steam_temp{margin-top: inherit;}#sort_scale{display:inline-block;padding:0 6px 0 16px;cursor:pointer;height:32px;margin-left:5px;line-height:32px;text-align:center;border-radius:4px;min-width:60px;border:1px solid #45536c;color:#63779b;vertical-align:middle}#sort_scale.enabled{background:#45536c;color:#fff}.list_card li h3{margin: 8px 12px 9px;}.list_card li>p>span.l_Left{margin-top:inherit}.list_card li>p>strong.f_Strong{display:block;font-size:20px;min-height:20px;}.price_scale{padding-top:2px}");
+        // 进度条样式
+        GM_addStyle(".helper-loading{position:absolute;margin:11px}.helper-progress-bar{height:20px;background:linear-gradient(90deg,rgb(22 122 193 / 70%) 0,rgb(51 177 159 / 50%) 70%,transparent);width:0;z-index:1000}");
+        // 排序按钮
+        $(".block-header>.l_Right").append($('<div class="w-Select-Multi w-Select-scroll buff-helper-sort" style="visibility: visible; width: 140px;"><h3 id="helper-sort-text">比例排序</h3><i class="icon icon_drop"></i><ul style="width: 140px;"><li data-value="null">默认</li><li data-value="buff-sort_asc"><span class="w-Order_asc">buff比例从低到高<i class="icon icon_order"></i></span></li><li data-value="buff-sort_desc"><span class="w-Order_des">buff比例从高到低<i class="icon icon_order"></i></span></li><li data-value="order-sort_asc"><span class="w-Order_asc">求购比例从低到高<i class="icon icon_order"></i></span></li><li data-value="order-sort_desc"><span class="w-Order_des">求购比例从高到低<i class="icon icon_order"></i></span></li></ul></div>'));
+        var sortBtnTimeout;
+        $(".buff-helper-sort").click(function () {
+            $(this).addClass("on");
+            clearTimeout(sortBtnTimeout);
+        }).mouseleave(function () {
+            let t = $(this);
+            if (t.hasClass("on")) {
+                sortBtnTimeout = setTimeout(() => t.removeClass("on"), 300);
+            }
+        });
+        $(".buff-helper-sort li").click(function (e) {
+            e.stopPropagation();
+            needSort = this.dataset.value;
+            if (this.dataset.value == "null") {
+                $("#helper-sort-text").text("比例排序");
+                sortGoods("data-default-sort", true);
+            } else {
+                $("#helper-sort-text").text(this.innerText);
+                let arr = this.dataset.value.split("_");
+                sortGoods("data-" + arr[0], arr[1] == "asc");
+            }
+            $(".buff-helper-sort").removeClass("on");
+        });
+        syncSort();
+        setTimeout(() => {
+            // 修改buff排序时重置比例排序规则
+            $("div[name='sort_by']").change(function () {
+                if (helper_config.overrideSortRule && this.getAttribute("value")) {
+                    needSort = this.dataset.value;
+                    $("#helper-sort-text").text("默认");
+                }
+            });
+        }, 500);
+        $(document).ajaxSuccess(function (event, xhr, header, result) {
+            if (/^\/api\/market\/goods/.exec(header.url) && result.data.items) {
+                buffHelperMarkerListScale(result.data.items);
+            }
+        });
+    }
 
     // 商品详情
     window.buffHelperGoodsDetailScale = function (data) {
@@ -88,7 +186,7 @@
             let isLogined = $("#navbar-cash-amount").length == 1;
             let isFirstTime = $(".good_scale").length == 0;
             let steamLink = $(".steam-link").attr("href");
-            let buff_item_id = getUrlParam("goods_id");
+            let buff_item_id = getGoodsId();
             let app_id = data.goods_infos[buff_item_id].appid;
             let hash_name = encodeURIComponent(data.goods_infos[buff_item_id].market_hash_name);
             let items = data.items;
@@ -150,8 +248,7 @@
                 steam_price_without_fee = getWithoutFeePrice(steam_lowest_sell_order_detail ? steam_lowest_sell_order_detail : steam_price_cny);
                 for (let i = 0; i < items.length; i++) {
                     let buff_sell_price = items[i].price;
-                    console.log(buff_sell_price)
-                    console.log(steam_price_without_fee)
+                    //let scale = roundToTwo(buff_sell_price / steam_price_without_fee);
                     let currencyRate = price[steamCurrency.strCode + ":CUR"] / price["CNY:CUR"]//人民币转外币汇率
                     let scale = roundToTwo(roundToTwo(buff_sell_price*currencyRate) / steam_price_without_fee);
                     if (scale === Infinity) {
@@ -231,17 +328,16 @@
             let buff_sell_reference_price = item.sell_reference_price;  // buff出售参考价(没卵用)
             let steam_highest_buy_order = 0;                            // steam最高求购价
             let steam_lowest_sell_order = 0;                            // steam最低出售价
-            let currencyRate = price[steamCurrency.strCode + ":CUR"] / price["CNY:CUR"]//人民币转外币汇率
             $(good).attr("data-order-sort", Infinity);
             getSteamOrderList(buff_item_id, steam_market_url).then(function onFulfilled(json) {
                 steam_highest_buy_order = json.highest_buy_order / 100;
                 steam_lowest_sell_order = json.lowest_sell_order / 100;
                 let orderNumber = $(json.buy_order_summary)[0].innerText;
                 let steamOrderScale = getScale(buff_sell_min_price, steam_highest_buy_order);
-                console.log(steamOrderScale)
                 $(good).attr("data-order-sort", steamOrderScale);
-                $(target).after($(steanOrderNumberTemp).text(orderNumber + "┊"));
-                paintingGradient(steamOrderScale, target, 4, steanOrderScaleTemp);
+                $(target).after($(steamOrderNumberTemp).text(orderNumber + "┊"));
+                // $(target).after($(steamSoldNumberTemp).text(orderNumber + "┊"));
+                paintingGradient(steamOrderScale, target, 4, steamOrderScaleTemp);
             }).catch(function onRejected(err) {
                 switch (err.status) {
                     case 429:
@@ -261,7 +357,7 @@
                         err.statusText = "无法访问steam";
                         break;
                 }
-                $(target).after($(steanOrderNumberErrorTemp).text(err.statusText));
+                $(target).after($(steamOrderNumberErrorTemp).text(err.statusText));
             }).finally(() => {
                 if (error) {
                     marketListLoadData(item, good, randomID, true);
@@ -341,7 +437,7 @@
             }
         }
         // 检测是否支持这个类型/游戏的饰品
-        let goods_id = getUrlParam("goods_id");
+        let goods_id = getGoodsId();
         if (data.goods_infos[goods_id].appid != 730 || data.total_count == 0 || enhancement_support_list.indexOf(data.goods_infos[goods_id].tags.category_group.internal_name) < 0) { return; }
         // 英文页面标志
         let isEn = $("#j_lang-switcher").data("current") === "en";
@@ -394,7 +490,9 @@
         }
         $(".stickers.masked").removeClass("masked");
         // 贴纸顺序
-        // $(".sticker-cont").css("float","right");
+        if (helper_config.reverseSticker) {
+            $(".sticker-cont").css("float", "right");
+        }
         // 英文页面3D检视
         if (isEn) {
             $(".ctag.btn_3d").html($(".ctag.btn_3d").html().substr(0, 37));
@@ -477,88 +575,6 @@
 
     };
 
-    if (location.pathname === "/market/goods") {
-        // 自带css
-        GM_addStyle(".market_commodity_orders_header_promote {color: whitesmoke;}#steam_sold{margin-top:5px}#steam_order{margin-top:5px}#steam_order_error{margin-top:5px;font-size: medium;font-weight: bold;color: #ff1e3e;}.market_listing_price_with_fee{color: #ffae3a;font-size: 12px;margin-left: 6px;}");
-        GM_addStyle(".steam-link{float:right;margin-top:3px}.detail-cont>.blank20{height:10px}");
-        // 组件css
-        GM_addStyle(".paymentIcon{padding:1px 13px 0 !important;position:absolute}a.j_shoptip_handler{margin-right:10px}.user-thum{margin: 0;}.icon_payment_alipay{background-position:-417px -331px}.icon_payment_others{background-position:-510px 0}.list_tb_csgo>tr>th:first-child{width:10px}.list_tb_csgo>tr>th:nth-child(2){padding-right:9px}.list_tb_csgo .pic-cont{width:112px;height:84px}.list_tb_csgo .pic-cont img{height:-webkit-fill-available;max-height:max-content;}.csgo_sticker.has_wear{position:absolute;margin-left:230px;}.sticker_parent_div{margin:14px 0 0 360px !important}.csgo_sticker.has_wear .stickers{width:62px;height:48px;margin:0;background: 0;}.stag{margin:0 0 0 2px !important;padding: 4px 6px;float:none !important}.float_rank{color: green;}.stickers:hover{opacity:1!important}");
-        GM_addStyle(".tooltip .tooltiptext{visibility:hidden;border: 1px solid #d0d0d0;width:128px;height:96px;background-color:#fbfbfbc7;position:absolute;z-index:60;bottom:100%;margin-left:-62px;border-radius:10px}.tooltip:hover .tooltiptext{visibility:visible}");
-        // 求购列表css
-        GM_addStyle(".market_commodity_orders_table{margin: 0 0 0 10px;height:100%;float:right;border-collapse:separate;background-color:rgba(0,0,0,0.3);}.market_commodity_orders_table tr:nth-child(even){background-color:#242b33}.market_commodity_orders_table td{text-align:center;padding:4px}.market_commodity_orders_table th{padding:4px;margin:0;text-align:center;font-size:16px;font-weight:normal}");
-
-        $(".detail-pic").css("background-repeat", "round").children().width(250);
-        if ($("#j_game-switcher").data("current") == "dota2") {
-            $(".detail-cont>p").append($(".detail-summ>a").clone().addClass("steam-link"));
-        } else {
-            $(".detail-cont>div:first").append($(".detail-summ>a").clone().addClass("steam-link"));
-        }
-        // 适配 ”饰品比例计算脚本“
-        $(".detail-summ>a").hide();
-        $(".detail-cont").css("margin-left", 0);
-
-        $(document).ajaxSuccess(function (event, status, header, result) {
-            if (/^\/api\/market\/goods\/sell_order/.exec(header.url) && result.data) {
-                steamFailedTimes = 0;
-                buffHelperModule_inspestEnhancementCsgo(result.data);
-                buffHelperGoodsDetailScale(result.data);
-            }
-        });
-    } else if (location.pathname === "/market/") {
-        $(document).ajaxSend(function (event, xhr, header, result) {
-            if (/^\/api\/market\/goods/.exec(header.url)) {
-                header.url += "&page_size=" + helper_config.pageSize;
-                $(".helper-progress-bar").remove();
-                $(".helper-loading").remove();
-                steamFailedTimes = 0;
-            }
-        });
-        // 主要样式
-        GM_addStyle("#sort_scale{display:inline-block;padding:0 6px 0 16px;cursor:pointer;height:32px;margin-left:5px;line-height:32px;text-align:center;border-radius:4px;min-width:60px;border:1px solid #45536c;color:#63779b;vertical-align:middle}#sort_scale.enabled{background:#45536c;color:#fff}.list_card li h3{margin: 8px 12px 9px;}.list_card li>p>span.l_Left{margin-top:inherit}.list_card li>p>strong.f_Strong{display:block;font-size:20px;min-height:20px;}.price_scale{padding-top:2px}");
-        // 进度条样式
-        GM_addStyle(".helper-loading{position:absolute;margin:11px}.helper-progress-bar{height:20px;background:linear-gradient(90deg,rgb(22 122 193 / 70%) 0,rgb(51 177 159 / 50%) 70%,transparent);width:0;z-index:1000}");
-        // 排序按钮
-        $(".block-header>.l_Right").append($('<div class="w-Select-Multi w-Select-scroll buff-helper-sort" style="visibility: visible; width: 140px;"><h3 id="helper-sort-text">比例排序</h3><i class="icon icon_drop"></i><ul style="width: 140px;"><li data-value="null">默认</li><li data-value="buff-sort_asc"><span class="w-Order_asc">buff比例从低到高<i class="icon icon_order"></i></span></li><li data-value="buff-sort_desc"><span class="w-Order_des">buff比例从高到低<i class="icon icon_order"></i></span></li><li data-value="order-sort_asc"><span class="w-Order_asc">求购比例从低到高<i class="icon icon_order"></i></span></li><li data-value="order-sort_desc"><span class="w-Order_des">求购比例从高到低<i class="icon icon_order"></i></span></li></ul></div>'));
-        var sortBtnTimeout;
-        $(".buff-helper-sort").click(function () {
-            $(this).addClass("on");
-            clearTimeout(sortBtnTimeout);
-        }).mouseleave(function () {
-            let t = $(this);
-            if (t.hasClass("on")) {
-                sortBtnTimeout = setTimeout(() => t.removeClass("on"), 300);
-            }
-        });
-        $(".buff-helper-sort li").click(function (e) {
-            e.stopPropagation();
-            needSort = this.dataset.value;
-            if (this.dataset.value == "null") {
-                $("#helper-sort-text").text("比例排序");
-                sortGoods("data-default-sort", true);
-            } else {
-                $("#helper-sort-text").text(this.innerText);
-                let arr = this.dataset.value.split("_");
-                sortGoods("data-" + arr[0], arr[1] == "asc");
-            }
-            $(".buff-helper-sort").removeClass("on");
-        });
-        syncSort();
-        setTimeout(() => {
-            // 修改buff排序时重置比例排序规则
-            $("div[name='sort_by']").change(function () {
-                if (helper_config.overrideSortRule && this.getAttribute("value")) {
-                    needSort = this.dataset.value;
-                    $("#helper-sort-text").text("默认");
-                }
-            });
-        }, 500);
-        $(document).ajaxSuccess(function (event, xhr, header, result) {
-            if (/^\/api\/market\/goods/.exec(header.url) && result.data.items) {
-                buffHelperMarkerListScale(result.data.items);
-            }
-        });
-    }
-
     function initHelper() {
         if ($(".floatbar>ul").length == 0) {
             setTimeout(() => { initHelper(); }, 100);
@@ -624,6 +640,9 @@
         GM_registerMenuCommand('打开设置面板', () => {
             openSettingPanel();
         });
+        GM_registerMenuCommand('插件官网', () => {
+            window.open("https://greasyfork.org/zh-CN/scripts/410137");
+        });
         // 初始化设置页面后填装面板
         init();
     }
@@ -645,17 +664,26 @@
     }
 
     function resetConfig() {
-        GM_setValue("helper_config", null);
-        helper_config = clone(defaultConfig);
-        initCurrency();
-        init();
+        if (!resetConfigtTimeout) {
+            GM_setValue("helper-trainingWheels-currency", null);
+            GM_setValue("helper_config", null);
+            helper_config = clone(defaultConfig);
+            initCurrency();
+            init();
+            showMessage("重置成功", "插件已恢复初始设定", 15, "success");
+            resetConfigtTimeout = true;
+            setTimeout(() => {
+                resetConfigtTimeout = false;
+            }, 2000);
+        }
     }
 
     function getDisplayCurrency() {
-        let currencyList = { "/¥/": "CNY", "/\\$/": "USD", "/€/": "EUR", "/₽/": "RUB" };
+        // 美元符号是特殊字符。。。记得转义
+        let currencyList = { "¥-¥": "CNY", "\\$-\\$": "USD", "€-€": "EUR", "₽-₽": "RUB" };
         let text = $(".w-Counter-input").text();
         for (let key in currencyList) {
-            if (eval(key).test(text)) {
+            if (text.search(key) == 1) {
                 return g_rgCurrencyData[currencyList[key]];
             }
         }
@@ -678,6 +706,29 @@
 
     function init() {
         $(".helper-setting>.list_tb .on").removeClass("on");
+
+
+        // 求求你们别随便改货币了，说明也不看的
+        if (!GM_getValue("helper-trainingWheels-currency")) {
+            $("#helper-setting-currency").parent().before('<span class="trainingWheels-currency" style="width: 128px;cursor:help;height: 34px;z-index: 51;opacity:0;background-color:#f00;position: absolute;"></span>');
+            $(".trainingWheels-currency").click(function () {
+                $(".helper-warning-currency").mouseenter();
+                let cover = this;
+                $(cover).unbind("click");
+                $(cover).css({ "cursor": "not-allowed", "opacity": "0.5" });
+                let count = 0;
+                let interval = setInterval(() => {
+                    $(cover).css("opacity", (50 - count) / 100);
+                    if (count++ == 50) {
+                        $(".trainingWheels-currency").remove();
+                        clearInterval(interval);
+                    }
+                }, 60);
+                GM_setValue("helper-trainingWheels-currency", true);
+            });
+        }
+
+
         if (helper_config.overrideSortRule) {
             $("#helper-setting-stickerSort").attr("value", helper_config.overrideSortRule).children(":first").addClass("on");
         }
@@ -696,9 +747,11 @@
                 "float": "right"
             });
         }
-        if (helper_config.needSort) {
-            syncSort();
+        if (helper_config.reverseSticker) {
+            $("#helper-setting-reverseSticker").attr("value", helper_config.reverseSticker).children(":first").addClass("on");
         }
+        reverseStickers(helper_config.reverseSticker);
+        syncSort();
         $("#helper-setting-pageSize").val(helper_config.pageSize);
         $("#helper-setting-maxRange").val(helper_config.maxRange);
         $("#helper-setting-minRange").val(helper_config.minRange);
@@ -708,6 +761,7 @@
         try {
             syncCurrency();
         } catch (error) {
+            // 因为旧版本和新版本数据不同，一个是json一个是字符，只能这么适配
             if (helper_config.steamCurrency.constructor === Object) {
                 helper_config.steamCurrency = helper_config.steamCurrency.strCode;
                 GM_setValue("helper_config", helper_config);
@@ -721,6 +775,10 @@
         needSort = helper_config.needSort;
         $("#helper-setting-sortRule>h3").text($("#helper-setting-sortRule li[value=" + helper_config.needSort + "]").addClass("on").text());
         $("#helper-sort-text").text($(".buff-helper-sort li[data-value=" + helper_config.needSort + "]").click().text());
+    }
+
+    function reverseStickers(isLeft) {
+        $(".sticker-cont").css("float", isLeft ? "right" : "left"); // 没写错
     }
 
     function updateSteamStatus() {
@@ -835,7 +893,6 @@
     }
 
     function paintingGradient(scale, target, position, template = '<strong class="f_16px f_Strong price_scale l_Right"></strong>') {
-        console.log(scale)
         let red = gradient(market_color_high[0], market_color_low[0], scale);
         let green = gradient(market_color_high[1], market_color_low[1], scale);
         let blue = gradient(market_color_high[2], market_color_low[2], scale);
@@ -885,6 +942,7 @@
     function getScale(originPrice, withFeePrice) {
         let currencyRate = price[steamCurrency.strCode + ":CUR"] / price["CNY:CUR"]//人民币转外币汇率
         return roundToTwo(roundToTwo(originPrice * currencyRate) / (withFeePrice / 1.15));
+        //return roundToTwo(originPrice / (withFeePrice / 1.15));
     }
 
     function clone(obj) {
@@ -894,13 +952,24 @@
     // 小数： "167639.87", "167639", ".87", "87"
     // 整数： "186267",    "186267"
     function convertPrice(str) {
-        console.log(helper_config)
-        console.log(steamCurrency)
         str = str.replace(steamCurrency.strThousandsSeparator, "");
         if (steamCurrency.strDecimalSymbol !== ".") {
             str = str.replace(steamCurrency.strDecimalSymbol, ".");
         }
         return str.match(/(\d+)(\.(\d{1,2}))?/);
+    }
+
+    function showMessage(title, msg, time = 30, type = "info", pos = 'topRight') {
+        // type: success[green] error[red] warning[orange] info[blue]
+        // pos: topLeft, topCenter, middleLeft, middleRight, middleCenter, bottomLeft, bottomRight, bottomCenter
+        // timeout: timeout * 100ms  代码内部似乎还有固定0.5s的前置/后置延迟
+        new NoticeJs({
+            title: title,
+            text: msg,
+            timeout: time,
+            type: type,
+            position: pos
+        }).show();
     }
 
     function gradient(max, min, f) {
@@ -913,15 +982,9 @@
         return max >= min ? f * (max - min) + min : (1 - f) * (min - max) + max;
     }
 
-    function getUrlParam(name, url) {
-        let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-        let result;
-        if (url) {
-            result = url.substr(34).match(reg);  //匹配目标参数
-        } else {
-            result = window.location.search.substr(1).match(reg);  //匹配目标参数
-        }
-        if (result != null) return unescape(result[2]); return null; //返回参数值
+    function getGoodsId() {
+        let result = window.location.pathname.match(/\d*$/)[0];  //匹配目标参数
+        if (result) return unescape(result); return null; //返回参数值
     }
 
     function getItemId(buff_item_id, steamLink) {
