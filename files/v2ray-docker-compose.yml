@@ -8,8 +8,8 @@ services:
     expose:
       - "443"
     volumes:
-      - ${PWD}/Service/v2ray:/etc/v2ray
-      - ${PWD}/Service/v2ray/logs:/var/log/v2ray
+      - ${PWD}:/etc/v2ray
+      - ${PWD}/logs:/var/log/v2ray
 networks:
   default:
     external:
