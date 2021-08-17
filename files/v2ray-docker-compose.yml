@@ -1,0 +1,16 @@
+version: "3"
+services:
+  v2ray:
+    image: v2fly/v2fly-core
+    container_name: v2ray
+    restart: always
+    command: v2ray -config=/etc/v2ray/config.json
+    expose:
+      - "443"
+    volumes:
+      - /home/opc/Service/v2ray:/etc/v2ray
+      - /home/opc/Service/v2ray/logs:/var/log/v2ray
+networks:
+  default:
+    external:
+      name: nginx-net
