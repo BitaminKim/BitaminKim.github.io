@@ -355,7 +355,103 @@
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          新的开始
+          怎样在 CentOS 7 上部署 Google BBR
+BBR（Bottleneck Bandwidth and RTT）是一种新的拥塞控制算法，由 Google 贡献给 Linux 内核 TCP 堆栈。有了 BBR，Linux 服务器可以显着提高吞吐量并减少连接延迟。此外，部署 BBR 很容易，因为此算法只需要在发送方更新，而无需在网络或接收方更新。
+
+在本文中，我将向您展示如何在 Vultr CentOS 7 KVM 服务器（其它 CentOS 同样适用）实例上部署 BBR。
+
+先决条件
+
+一台 Vultr CentOS 7 x64 服务器。
+拥有 sudo 用户。
+步骤一：使用 ELRepo RPM 源仓库升级系统内核
+为了使用 BBR，需要将 CentOS 7 机器的系统内核升级到 4.9.0 以上（注意如果您的机器系统内核版本高于 4.9.0，可以跳过本步骤，直接进行步骤二）。可以很容易使用 ELRepo RPM 源仓库做到这些。
+
+在升级之前，可以检查当前的系统内核：
+
+uname -r
+这是命令行应该输出一行类似于下面的字符串：
+
+3.10.0-514.2.2.el7.x86_64
+如您所见，当前的内核版本是 3.10.0。
+
+需要升级机器的内核版本，首先安装 ELRepo：
+
+sudo rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
+sudo rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm
+接下来使用 ELRepo 升级系统内核：
+
+sudo yum --enablerepo=elrepo-kernel install kernel-ml -y
+使用下面的命令确认安装的结果：
+
+rpm -qa | grep kernel
+如果安装成功的话，您应该会看到 kernel-ml-4.9.0-1.el7.elrepo.x86_64 出现在结果列表中：
+
+kernel-ml-4.9.0-1.el7.elrepo.x86_64
+kernel-3.10.0-514.el7.x86_64
+kernel-tools-libs-3.10.0-514.2.2.el7.x86_64
+kernel-tools-3.10.0-514.2.2.el7.x86_64
+kernel-3.10.0-514.2.2.el7.x86_64
+现在您需要通过设置默认 grub2 引导来启用 4.9.0+ 内核。
+
+查看所有 grub2 列表：
+
+sudo egrep ^menuentry /etc/grub2.cfg | cut -f 2 -d \'
+结果应该是这样的：
+
+CentOS Linux 7 Rescue a0cbf86a6ef1416a8812657bb4f2b860 (4.9.0-1.el7.elrepo.x86_64)
+CentOS Linux (4.9.0-1.el7.elrepo.x86_64) 7 (Core)
+CentOS Linux (3.10.0-514.2.2.el7.x86_64) 7 (Core)
+CentOS Linux (3.10.0-514.el7.x86_64) 7 (Core)
+CentOS Linux (0-rescue-bf94f46c6bd04792a6a42c91bae645f7) 7 (Core)
+索引开始于 0。这意味着系统 4.9.0+ 位于 1：
+
+sudo grub2-set-default `
+重启系统：
+
+sudo shutdown -r now
+当服务器重新完成时，登陆进入并确认 uname 命令返回的当前系统正在使用的内核版本：
+
+uname -r
+看到的应该是下面的结果：
+
+4.9.0-1.el7.elrepo.x86_64
+步骤二：应用 BBR
+为了应用 BBR 算法，需要像下面这样修改 sysctl 配置：
+
+echo 'net.core.default_qdisc=fq' | sudo tee -a /etc/sysctl.conf
+echo 'net.ipv4.tcp_congestion_control=bbr' | sudo tee -a /etc/sysctl.conf
+sudo sysctl -p
+现在，您可以使用下面的命令确认是否应用 BBR：
+
+sudo sysctl net.ipv4.tcp_available_congestion_control
+输出的结果应该类似于：
+
+net.ipv4.tcp_available_congestion_control = bbr cubic reno
+接下来，验证如下命令：
+
+sudo sysctl -n net.ipv4.tcp_congestion_control
+输出结果应该是：
+
+bbr
+最后，检查系统内核模块是否被加载：
+
+lsmod | grep bbr
+命令行的输出类似于：
+
+tcp_bbr      16384  0
+步骤三（可选项）：测试网络性能增强
+为了测试 BBR 的网络性能增强，可以在服务器文件夹创建一个用于下载文件，然后在桌面机器上使用浏览器测试下载速度。
+
+sudo yum install httpd -y
+sudo systemctl start httpd.service
+sudo firewall-cmd --zone=public --permanent --add-service=http
+sudo firewall-cmd --reload
+cd /var/www/html
+sudo dd if=/dev/zero of=500mb.zip bs=1024k count=500
+最后，在您的桌面电脑的 web 浏览器上访问地址 http://[your-server-IP]/500mb.zip，然后确认下载速度。
+
+这里本文就结束了，感谢您的阅读。
         
       </div>
     </a>
